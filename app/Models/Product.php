@@ -19,7 +19,11 @@ class Product extends Model
         'transaction_id',
     ];
 
+    public function supplier(){
+        $this->belongsTo(Supplier::class);
+    }
+
     public function transactions(){
-        $this->hasMany(Transaction::class);
+        return $this->belongsToMany(Transaction::class);
     }
 }

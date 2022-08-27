@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Supplier;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -12,9 +12,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function in()
     {
-        //
+        $product = Supplier::with('product')->get();
+
+        return view('product.index',compact('product'));
     }
 
     /**
