@@ -16,7 +16,7 @@ class Product extends Model
         'qty',    
         'desc',
         'price',
-        'transaction_id',
+        'supplier_id',
     ];
 
     public function supplier(){
@@ -24,6 +24,6 @@ class Product extends Model
     }
 
     public function transactions(){
-        return $this->belongsToMany(Transaction::class);
+        return $this->hasMany(Transaction::class);
     }
 }

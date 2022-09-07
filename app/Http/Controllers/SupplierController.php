@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Supplier;
+use App\Models\Product;
+
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller
@@ -15,7 +17,8 @@ class SupplierController extends Controller
     public function index()
     {
         $supplier = Supplier::all();
-        return view('supplier.index');
+
+        return view('supplier.index',compact('supplier'));
     }
 
     /**
@@ -36,7 +39,34 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'image' => 'file|max:3072',
+            'name' => 'required',
+            'address' => 'required',
+            'email' => 'required',
+
+
+        ]);
+        $supplier = new Supplier();
+        $supplier->name = $request->name;
+        $supplier->address = $request->address;
+        $supplier->email = $request->email;
+
+        if($request->image){
+
+            $img = $request->file('image');
+            $filename = $img->getClientOriginalName();
+    
+            if ($request->hasFile('image')) {
+                $request->file('image')->storeAs('/supplier',$filename);
+            }
+            $supplier->image = $request->file('image')->getClientOriginalName();
+        }
+        // dd($supplier);
+        $supplier->save();
+
+        return redirect()->back();
+
     }
 
     /**
@@ -56,9 +86,37 @@ class SupplierController extends Controller
      * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function edit(Supplier $supplier)
+    public function edit(Request $request,$id)
     {
-        //
+        $supplier = Supplier::where('id',$id)->firstOrFail();
+
+        $request->validate([
+            'image' => 'file|max:3072',
+            'name' => 'required',
+            'address' => 'required',
+            'email' => 'required',
+            
+        ]);
+
+        $supplier->name = $request->name;
+        $supplier->address = $request->address;
+        $supplier->email = $request->email;
+        
+        if($request->image){
+
+            $img = $request->file('image');
+            $filename = $img->getClientOriginalName();
+    
+            if ($request->hasFile('image')) {
+                $request->file('image')->storeAs('/supplier',$filename);
+            }
+            $supplier->image = $request->file('image')->getClientOriginalName();
+        }
+        // dd($supplier);
+        $supplier->update();
+
+        return redirect()->back();
+
     }
 
     /**
@@ -79,8 +137,11 @@ class SupplierController extends Controller
      * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Supplier $supplier)
-    {
-        //
+    public function destroy($id){
+        $data = Supplier::find($id);
+
+        $data->delete();
+
+        return redirect()->back();
     }
 }

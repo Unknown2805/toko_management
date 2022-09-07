@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductController;
 
@@ -15,13 +16,17 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('auth.login');
+});
 Route::controller(App\Http\Controllers\SupplierController::class)
     ->prefix('/supplier')
     ->group(function(){
             Route::get('/','index');
+            Route::post('/add','store');
+            Route::put('/edit/{id}', 'edit');
+            Route::delete('/delete/{id}', 'destroy');
+
          
     });
 
