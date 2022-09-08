@@ -3,11 +3,11 @@
     @foreach ($supplier as $s)
         @foreach ($s->products as $p)
             
-        <div class="modal fade" id="deleteSupp{{ $p->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="deleteProduct{{ $p->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                 
-                    <form action={{ url('/supplier/delete/' . $p->id) }} method="POST" enctype="multipart/form-data">
+                    <form action={{ url('/product/delete/' . $p->id) }} method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('DELETE')
                         <div class="modal-body">
@@ -29,15 +29,18 @@
         @endforeach
     @endforeach
 
-    <h2 class="mb-3">Supplier</h2>
+    <h2 class="mb-3">Products</h2>
     
     <div class="card">
         <div class="card-body">
 
-            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addProduct">
+            @if (!isset($supplier[0]->name))
+            @else
+            <button type="button" class="btn btn-primary btn-md mb-3" data-bs-toggle="modal" data-bs-target="#addProduct">
                 Add +
             </button>
-            <table class="table"    >
+            @endif
+            <table class="table" id="table1">
                 <thead>
                     <th>Photo</th>
                     <th>Supplier</th>
@@ -52,7 +55,7 @@
                         @foreach($s->products as $p)
                         <tr>
                             <td> 
-                                    <img src="{{ $p->image == null ? asset('assets/images/samples/bg-mountain.jpg') : asset('/storage/supplier/'. $p->image) }}" style="height: 170px;width:170px;border-radius:10px;">
+                                    <img src="{{ $p->image == null ? asset('assets/images/samples/banana.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 170px;width:170px;border-radius:10px;">
                             </td>         
                             <td>{{$s->name}}</td>
                             <td>{{$p->name}}</td>
@@ -71,6 +74,12 @@
         </div>
     </div>
 
+    @if(!isset($supplier[0]->name))
+    <div class="text-center">
+        <a href="{{url('/supplier')}}" class="text-danger">Add Supplier first</a>
+    </div>
+    @else
+    @endif
     @include('product/modalProduct')
 
 @endsection

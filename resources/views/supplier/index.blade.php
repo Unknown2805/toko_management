@@ -30,7 +30,7 @@
     <div class="card">
         <div class="card-body">
 
-            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addSupp">
+            <button type="button" class="btn btn-primary btn-md mb-3" data-bs-toggle="modal" data-bs-target="#addSupp">
                 Add +
             </button>
             <table class="table" id="table1">

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('untung');
             $table->integer('rugi');
+            $table->integer('product_id');
+            $table->integer('price_k');
             $table->integer('qty_k');
             $table->timestamps();
         });
