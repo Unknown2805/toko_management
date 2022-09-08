@@ -16,11 +16,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function in()
+    public function index()
     {
-        $product = Supplier::with('product')->get();
+        $supplier = Supplier::with('products')->get();
 
-        return view('product.index',compact('product'));
+        return view('product.index',compact('supplier'));
     }
 
     /**
@@ -41,7 +41,38 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'image' => 'file|max:3072',
+            'name' => 'required',
+            'qty' => 'required',
+            'desc' => 'required',
+            'price' => 'required',
+            'supplier_id' => 'required'
+
+        ]);
+        $product =  new Suplier();
+        $product->name = $request->name;
+        $product->qty= $request->qty;
+        $product->desc = $request->desc;
+        $product->price = $request->price;
+        $product->supplier_id = $request->supplier_id;
+
+
+        if($request->image){
+
+            $img = $request->file('image');
+            $filename = $img->getClientOriginalName();
+    
+            if ($request->hasFile('image')) {
+                $request->file('image')->storeAs('/product',$filename);
+            }
+            $product->image = $request->file('image')->getClientOriginalName();
+        }
+        // dd($
+     $product->save();
+
+        return redirect()->back();
+
     }
 
     /**

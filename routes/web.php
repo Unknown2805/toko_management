@@ -33,8 +33,10 @@ Route::controller(App\Http\Controllers\SupplierController::class)
 Route::controller(App\Http\Controllers\ProductController::class)
     ->prefix('/product')
     ->group(function(){
-            Route::get('/in','in');
-         
+            Route::get('/','index');
+            Route::post('/add','store');
+            Route::put('/edit/{id}', 'edit');
+
     });
 
 Auth::routes();

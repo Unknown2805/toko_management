@@ -76,6 +76,12 @@
                                 <span>Supplier</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="{{ url('/product') }}" class='sidebar-link'>
+                                <i class="bi bi-cube-fill"></i>
+                                <span>Products</span>
+                            </a>
+                        </li>
 
                         <li class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>

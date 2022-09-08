@@ -72,7 +72,7 @@
                                 <div class="mb-3">
                                     <label for="formGroupExampleInput2" class="form-label">Name</label>
                                     
-                                    <input type="name" class="form-control" placeholder="Name" name="name" value="{{$s->name}}" autocomplete="off">
+                                    <input type="text" class="form-control" placeholder="Name" name="name" value="{{$s->name}}" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
