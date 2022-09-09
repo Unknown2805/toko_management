@@ -38,7 +38,7 @@
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">Supplier</label>
 
-                                <select class="form-select" aria-label="Default select example" name="supplier_id">
+                                <select class="choices form-select" aria-label="Default select example" name="supplier_id">
                                     @foreach ($supplier as $s)     
                                     <option value="{{$s->id}}">{{$s->name}}</option>
                                     @endforeach

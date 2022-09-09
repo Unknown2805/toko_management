@@ -10,7 +10,7 @@
         <link rel="stylesheet" href={{ asset('assets/css/main/app-dark.css') }}>
         <link rel="shortcut icon" href={{ asset('assets/images/logo/favicon.svg') }} type="image/x-icon">
         <link rel="shortcut icon" href={{ asset('assets/images/logo/favicon.png') }} type="image/png">
-
+        <link rel="stylesheet" href={{asset('assets/extensions/choices.js/public/assets/styles/choices.css')}}>
         <link rel="stylesheet" href={{ asset('assets/css/pages/simple-datatables.css') }}>
 
 
@@ -160,8 +160,6 @@
 
         <script src={{ asset('assets/js/pages/dashboard.js') }}></script>
         <script src={{ asset('assets/js/extensions/simple-datatables.js') }}></script>
-
-
         <script src="assets/js/extensions/ui-chartjs.js"></script>
 
     </body>
