@@ -55,7 +55,7 @@
                         @foreach($s->products as $p)
                         <tr>
                             <td> 
-                                    <img src="{{ $p->image == null ? asset('assets/images/samples/banana.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 170px;width:170px;border-radius:10px;">
+                                <img src="{{ $p->image == null ? asset('assets/images/samples/banana.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 170px;width:170px;border-radius:10px;">
                             </td>         
                             <td>{{$s->name}}</td>
                             <td>{{$p->name}}</td>

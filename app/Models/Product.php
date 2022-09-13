@@ -18,7 +18,12 @@ class Product extends Model
         'desc',
         'price',
         'supplier_id',
+        'category_id'
     ];
+
+    public function category(){
+        $this->belongsTo(Category::class);
+    }
 
     public function supplier(){
         $this->belongsTo(Supplier::class);

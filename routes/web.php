@@ -40,6 +40,16 @@ Route::controller(App\Http\Controllers\ProductController::class)
 
     });
 
+Route::controller(App\Http\Controllers\CategoryController::class)
+    ->prefix('/category')
+    ->group(function(){
+            Route::get('/','index');
+            Route::post('/add','store');
+            Route::put('/edit/{id}', 'edit');
+            Route::delete('/delete/{id}', 'destroy');
+
+    });
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

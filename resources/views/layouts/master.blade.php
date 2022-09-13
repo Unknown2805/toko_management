@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Toko Management</title>
-
         <link rel="stylesheet" href={{ asset('assets/css/main/app.css') }}>
         <link rel="stylesheet" href={{ asset('assets/css/main/app-dark.css') }}>
         <link rel="shortcut icon" href={{ asset('assets/images/logo/favicon.svg') }} type="image/x-icon">
@@ -76,12 +74,7 @@
                                     <span>Suppliers</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item">
-                                <a href="{{ url('/product') }}" class='sidebar-link'>
-                                    <i class="bi bi-box2-fill"></i>
-                                    <span>Products</span>
-                                </a>
-                            </li>
+                           
 
                             <li class="sidebar-item  has-sub">
                                 <a href="#" class='sidebar-link'>
@@ -90,15 +83,16 @@
                                 </a>
                                 <ul class="submenu ">
                                     <li class="submenu-item {{ request()->is('in*') ? 'active' : '' }}">
-                                        <a href={{ url('in') }}>Products In</a>
+                                        <a href="{{ url('/category') }}" class='sidebar-link'>
+                                            <i class="bi bi-grid-1x2-fill"></i>
+                                            <span>Categories</span>
+                                        </a>                                    
                                     </li>
-                                    <li
-                                        class="submenu-item {{ request()->is('/sale*') ? 'active' : '' }}">
-                                        <a href={{ url('/sale') }}>Products Sale</a>
-                                    </li>
-                                    <li
-                                        class="submenu-item {{ request()->is('/out*') ? 'active' : '' }}">
-                                        <a href={{ url('/out') }}>Products Out</a>
+                                    <li class="submenu-item {{ request()->is('/sale*') ? 'active' : '' }}">
+                                        <a href="{{ url('/product') }}" class='sidebar-link'>
+                                            <i class="bi bi-box2-fill"></i>
+                                            <span>Products</span>
+                                        </a>                                    
                                     </li>
                                 </ul>
                             </li>
@@ -160,7 +154,7 @@
 
         <script src={{ asset('assets/js/pages/dashboard.js') }}></script>
         <script src={{ asset('assets/js/extensions/simple-datatables.js') }}></script>
-        <script src="assets/js/extensions/ui-chartjs.js"></script>
+        <script src={{ asset('assets/js/extensions/ui-chartjs.js') }}></script>
 
     </body>
 
