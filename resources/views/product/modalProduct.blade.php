@@ -10,14 +10,14 @@
             
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-12 col-md-6">
+                        <div class="col-8 col-md-8">
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">Name Product</label>
                             
                                 <input type="name" class="form-control" placeholder="Name Product" name="name" autocomplete="off">
                             </div>
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-4 col-md-4">
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">Quantity Product</label>
                             
@@ -27,23 +27,25 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-6 col-md-6">
+                        <div class="col-8 col-md-8">
+                            <div class="mb-3">
+                                <label for="formGroupExampleInput2" class="form-label">Category</label>
+
+                                <select class="choices form-select" aria-label="Default select example" name="category_id">
+                                    @foreach ($supplier as $s) 
+                                        @foreach ($s->categories as $c)                                            
+                                            <option value="{{$c->id}}">{{$c->name}}</option>
+                                        @endforeach    
+                                    @endforeach
+                                </select>
+                            </div>     
+                        </div>
+                        <div class="col-4 col-md-4">
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">Price Product</label>
                             
                                 <input type="text" class="form-control" placeholder="Price Product" name="price" autocomplete="off">
                             </div>
-                        </div>
-                        <div class="col-6 col-md-6">
-                            <div class="mb-3">
-                                <label for="formGroupExampleInput2" class="form-label">Supplier</label>
-
-                                <select class="choices form-select" aria-label="Default select example" name="supplier_id">
-                                    @foreach ($supplier as $s)     
-                                    <option value="{{$s->id}}">{{$s->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>     
                         </div>
                     </div>
 
@@ -70,7 +72,9 @@
 </div>
 
 @foreach ($supplier as $s)
-    @foreach($s->products as $p)
+    @foreach($s->categories as $c)
+        @foreach ($c->products as $p)
+            
         <div class="modal fade" id="editProduct{{$p ->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -84,12 +88,12 @@
                         <div class="modal-body">
                             <div class="col-12 col-md-12 mb-4">
                                 <div class="d-flex justify-content-center">
-                                    <img src="{{ $s->image == null ? asset('assets/images/samples/banana.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 150px;width:150px;border-radius:150px;">
+                                    <img src="{{ $p->image == null ? asset('assets/images/samples/banana.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 150px;width:150px;border-radius:150px;">
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-8">
                                     <div class="mb-3">
                                         <label for="formGroupExampleInput2" class="form-label">Name Product</label>
                                         
@@ -97,7 +101,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-md-6">
+                                <div class="col-12 col-md-4">
                                     <div class="mb-3">
                                         <label for="formGroupExampleInput2" class="form-label">Quantity Product</label>
                                         
@@ -108,27 +112,29 @@
                             </div>
                             
                             <div class="row">
-                                <div class="col-6 col-md-6">
-
+                                <div class="col-8 col-md-8">
+                                    <div class="mb-3">
+                                        <label for="formGroupExampleInput2" class="form-label">Category</label>
+    
+                                        <select class="form-select" aria-label="Default select example" name="category_id">
+                                            @foreach ($supplier as $s) 
+                                                @foreach ($s->categories as $c)    
+                                                    <option value="{{$c->id}}">{{$c->name}}</option>
+                                                @endforeach
+                                            @endforeach
+                                        </select>
+                                    </div>                    
+                                </div>
+                                <div class="col-4 col-md-4">
+    
                                     <div class="mb-3">
                                         <label for="formGroupExampleInput2" class="form-label">Price Product</label>
                                         
                                         <input type="text" class="form-control" placeholder="Name" name="price" value="{{$p->price}}" autocomplete="off">
                                     </div>
                                 </div>
-                                <div class="col-6 col-md-6">
-                                    <div class="mb-3">
-                                        <label for="formGroupExampleInput2" class="form-label">Supplier</label>
-    
-                                        <select class="form-select" aria-label="Default select example" name="supplier_id">
-                                            @foreach ($supplier as $s)     
-                                            <option value="{{$s->id}}">{{$s->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    
-                                </div>
                             </div>
+                            
                                 <div class="mb-3">
                                     <label for="formGroupExampleInput2" class="form-label">Description Product</label>
                                     
@@ -151,5 +157,50 @@
                 </div>
             </div>
         </div>
+        @endforeach
+    @endforeach
+@endforeach
+
+@foreach ($supplier as $s)
+    @foreach($s->categories as $c)
+        @foreach ($c->products as $p)
+            
+        <div class="modal fade" id="viewProduct{{$p ->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detail Product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                        <div class="modal-body ms-1 me-1">
+                            <div class="row mb-4">
+                                <div class="col-12 col-md-4 mb-4">
+                                    <div class="d-flex justify-content-center">
+                                        <img src="{{ $p->image == null ? asset('assets/images/samples/banana.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 160px;width:160px;border-radius:30px;">
+                                    </div>
+    
+                                </div>
+                                <div class="col-8 col-md-8 mt-2">
+                                    <h2 class="mb-3">{{ $p->name }}</h2>
+                                        <h4 class="text-success mb-5">Rp. {{ $p->price }}</h4>
+                                        <h5> stock: {{ $p->qty }}</h4>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <h5>Description</h5>
+                            </div>
+                            <hr>
+        
+                            <div class="text-center">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="desc" disabled>{{$p->desc}}</textarea>
+                            </div>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
     @endforeach
 @endforeach

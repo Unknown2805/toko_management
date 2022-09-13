@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Supplier;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -15,11 +16,12 @@ class ProductController extends Controller
     //index product  
         public function index()
             {
-                $supplier = Supplier::with('products')->get();
-
+                $supplier = Supplier::with('categories.products')->get();
+                
                 return view('product.index',compact('supplier'));
             }
-    //add product
+
+    // add product
         public function store(Request $request)
             {
                 $this->validate($request, [
@@ -28,7 +30,7 @@ class ProductController extends Controller
                     'qty' => 'required',
                     'desc' => 'required',
                     'price' => 'required',
-                    'supplier_id' => 'required'
+                    'category_id' => 'required',
 
                 ]);
                 $product =  new Product();
@@ -36,8 +38,7 @@ class ProductController extends Controller
                 $product->qty= $request->qty;
                 $product->desc = $request->desc;
                 $product->price = $request->price;
-                $product->supplier_id = $request->supplier_id;
-
+                $product->category_id = $request->category_id;
 
                 if($request->image){
 
@@ -67,14 +68,14 @@ class ProductController extends Controller
                     'qty' => 'required',
                     'desc' => 'required',
                     'price' => 'required',
-                    'supplier_id' => 'required'       
+                    'category_id' => 'required'       
                 ]);
 
                 $product->name = $request->name;
                 $product->qty= $request->qty;
                 $product->desc = $request->desc;
                 $product->price = $request->price;
-                $product->supplier_id = $request->supplier_id;
+                $product->category_id = $request->category_id;
 
                 if($request->image){
 

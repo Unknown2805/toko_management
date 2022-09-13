@@ -39,7 +39,7 @@
                     <th>Supplier</th>
                     <th>Address</th>
                     <th>Email</th>
-                    <th>Action</th>
+                    <th><center>Action</center></th>
                 </thead>
                 <tbody>
                     @foreach ($supplier as $s)
@@ -51,8 +51,10 @@
                             <td>{{$s->address}}</td>
                             <td>{{$s->email}}</td>
                             <td>
-                                <a class="btn shadow btn-outline-success btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#editSupp{{ $s->id }}">Edit</i></a>
-                                <a class="btn shadow btn-outline-danger btn-md shadow" data-bs-toggle="modal" data-bs-target="#deleteSupp{{ $s->id }}">delete</i></a>
+                                <center>
+                                    <a class="btn shadow btn-outline-success btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#editSupp{{ $s->id }}">Edit</i></a>
+                                    <a class="btn shadow btn-outline-danger btn-md shadow" data-bs-toggle="modal" data-bs-target="#deleteSupp{{ $s->id }}">delete</i></a>
+                                </center>
                             </td>
                         </tr>       
                     @endforeach

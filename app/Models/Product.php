@@ -17,16 +17,11 @@ class Product extends Model
         'qty',    
         'desc',
         'price',
-        'supplier_id',
         'category_id'
     ];
 
     public function category(){
-        $this->belongsTo(Category::class);
-    }
-
-    public function supplier(){
-        $this->belongsTo(Supplier::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function transactions(){

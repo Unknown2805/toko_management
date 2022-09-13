@@ -18,7 +18,7 @@ class Supplier extends Model
         'email',
     ];
 
-    public function products(){
-        return $this->hasMany(Product::class);
+    public function categories(){
+        return $this->hasMany(Category::class);
     }
 }
