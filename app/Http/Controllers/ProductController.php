@@ -37,7 +37,7 @@ class ProductController extends Controller
                 $product->name = $request->name;
                 $product->qty= $request->qty;
                 $product->desc = $request->desc;
-                $product->price = $request->price;
+                $product->price = preg_replace("/[^0-9]/", "", $request->price);
                 $product->category_id = $request->category_id;
 
                 if($request->image){
@@ -74,7 +74,7 @@ class ProductController extends Controller
                 $product->name = $request->name;
                 $product->qty= $request->qty;
                 $product->desc = $request->desc;
-                $product->price = $request->price;
+                $product->price = preg_replace("/[^0-9]/", "", $request->price);
                 $product->category_id = $request->category_id;
 
                 if($request->image){

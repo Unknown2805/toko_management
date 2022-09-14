@@ -69,11 +69,11 @@
                         <tr>
                             <td>{{ $loop->iteration}}</td>
                             <td>
-                                <img src="{{ $p->image == null ? asset('assets/images/samples/banana.jpg') : asset('/storage/product/'. $s->image) }}" style="height: 170px;width:170px;border-radius:10px;">
+                                <img src="{{ $p->image == null ? asset('assets/images/samples/banana.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 170px;width:170px;border-radius:10px;">
                             </td>
                             <td>{{ $c->name}}</td>
                             <td>{{ $p->name }}</td>
-                            <td>Rp. {{ $p->price }}</td>
+                            <td>Rp. @money((float)$p->price)</td>
                             
                             
                             <td>
@@ -99,5 +99,34 @@
     @else
     @endif
     @include('product/modalProduct')
+
+    <script type="text/javascript">
+     
+
+        function formatbaru(e){
+            let hasil = formatedit(e.target.value);
+
+            e.target.value = hasil;
+        }
+      
+        /* Fungsi formateditom */
+        function formatedit(angka) {
+            var prefix = "Rp";
+          var number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split = number_string.split(','),
+            sisa = split[0].length % 3,
+            edit = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+      
+          // tambahkan titik jika yang di input sudah menjadi angka ribuan
+          if (ribuan) {
+            separator = sisa ? '.' : '';
+            edit += separator + ribuan.join('.');
+          }
+      
+          edit = split[1] != undefined ? edit + ',' + split[1] : edit;
+          return prefix == undefined ? edit : (edit ? 'Rp ' + edit : '');
+        }
+      </script>
 
 @endsection

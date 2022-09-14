@@ -39,7 +39,8 @@
                 
                 <thead>
                         <th>No</th>
-                        <th>Categories</th>                
+                        <th>Categories</th> 
+                        <th>Suppliers</th>               
                         <th><center>Action</center></th>
                     
                 </thead>
@@ -48,8 +49,9 @@
                         @foreach ($s->categories as $c)
 
                             <tr>
-                                <td>{{ $loop->iteration}}</td>     
+                                <td>{{ $loop->iteration}}</td> 
                                 <td>{{ $c->name }}</td>
+                                <td>{{ $s->name }}</td>    
                         
                                 <td>
                                     <center>

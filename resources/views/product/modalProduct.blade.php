@@ -44,7 +44,7 @@
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">Price Product</label>
                             
-                                <input type="text" class="form-control" placeholder="Price Product" name="price" autocomplete="off">
+                                <input type="text" class="form-control" placeholder="Price Product" name="price" autocomplete="off" onkeyup="formatbaru(event)">
                             </div>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                                     <div class="mb-3">
                                         <label for="formGroupExampleInput2" class="form-label">Price Product</label>
                                         
-                                        <input type="text" class="form-control" placeholder="Name" name="price" value="{{$p->price}}" autocomplete="off">
+                                        <input type="text" class="form-control" placeholder="Name" name="price" value="{{g$p->price}}" autocomplete="off" onkeyup="formatbaru(event)">
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +183,7 @@
                                 </div>
                                 <div class="col-8 col-md-8 mt-2">
                                     <h2 class="mb-3">{{ $p->name }}</h2>
-                                        <h4 class="text-success mb-5">Rp. {{ $p->price }}</h4>
+                                        <h4 class="text-success mb-5">Rp. @money((float)$p->price)</h4>
                                         <h5> stock: {{ $p->qty }}</h4>
                                 </div>
                             </div>
