@@ -130,7 +130,7 @@
                                     <div class="mb-3">
                                         <label for="formGroupExampleInput2" class="form-label">Price Product</label>
                                         
-                                        <input type="text" class="form-control" placeholder="Name" name="price" value="{{g$p->price}}" autocomplete="off" onkeyup="formatbaru(event)">
+                                        <input type="text" class="form-control" placeholder="Name" name="price" value="{{$p->price}}" autocomplete="off" onkeyup="formatbaru(event)">
                                     </div>
                                 </div>
                             </div>

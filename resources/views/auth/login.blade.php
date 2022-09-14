@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="text-center mb-5">
 
-                                    Inventory Web
+                                    Toko Management
                                 </div>
                             </h5>
                         </div>
