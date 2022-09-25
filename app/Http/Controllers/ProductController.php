@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Supplier;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -16,9 +15,9 @@ class ProductController extends Controller
     //index product  
         public function index()
             {
-                $supplier = Supplier::with('categories.products')->get();
+                $category = Category::with('products')->get();
                 
-                return view('product.index',compact('supplier'));
+                return view('product.index',compact('category'));
             }
 
     // add product

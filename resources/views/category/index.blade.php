@@ -1,7 +1,6 @@
 @extends('layouts.master')
 @section('main')
-    @foreach ($supplier as $s)                        
-        @foreach ($s->categories as $c)
+        @foreach ($category as $c)
             <div class="modal fade" id="deleteCat{{ $c->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -25,7 +24,6 @@
                 </div>
             </div>
         @endforeach
-    @endforeach
 
     <h2 class="mb-3">Category</h2>
     
@@ -45,14 +43,11 @@
                     
                 </thead>
                 <tbody>
-                    @foreach ($supplier as $s)                        
-                        @foreach ($s->categories as $c)
+                        @foreach ($category as $c)
 
                             <tr>
                                 <td>{{ $loop->iteration}}</td> 
-                                <td>{{ $c->name }}</td>
-                                <td>{{ $s->name }}</td>    
-                        
+                                <td>{{ $c->name }}</td>                        
                                 <td>
                                     <center>
                                         <a class="btn shadow btn-outline-success btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#editCat{{ $c->id }}">Edit</i></a>
@@ -62,7 +57,6 @@
                             </tr> 
                                 
                         @endforeach
-                    @endforeach
                 </tbody>
             </table>
         </div>

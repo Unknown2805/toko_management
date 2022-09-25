@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Supplier;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -14,8 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $supplier = Supplier::with('categories')->get();
-        return view('category.index',compact('supplier'));
+        $category = Category::all();
+        return view('category.index',compact('category'));
     }
 
     /**
@@ -38,12 +37,10 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'supplier_id' => 'required'
         ]);
 
         $category = new Category();
         $category->name = $request->name;
-        $category->supplier_id = $request->supplier_id;
 
         
         // dd($category);
@@ -76,11 +73,9 @@ class CategoryController extends Controller
 
         $request->validate([
             'name' => 'required',  
-            'supplier_id' => 'required'
         ]);
 
         $category->name = $request->name;
-        $category->supplier_id = $request->supplier_id;
 
         // dd($category);
         $category->update();

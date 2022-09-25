@@ -1,7 +1,6 @@
 @extends('layouts.master')
 @section('main')
-    @foreach ($supplier as $s)
-        @foreach ($s->categories as $c)
+        @foreach ($category as $c)
             @foreach ($c->products as $p)
                 
             <div class="modal fade" id="deleteProduct{{ $p->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -29,24 +28,20 @@
 
             @endforeach
         @endforeach
-    @endforeach
 
     <h2 class="mb-3">Products</h2>
     
     <div class="card">
         <div class="card-body">
 
-            @if (!isset($supplier[0]->name))
-            @else
-            <div class="row justify-content-between mb-3">
+          
                 <div class="col-12 col-md-12">
                     <button type="button" class="btn btn-primary btn-md mb-3" data-bs-toggle="modal" data-bs-target="#addProduct">
                         Add +
                     </button>
                 </div>
 
-            </div>
-            @endif
+           
             <table class="table" id="table1">
                 <thead>
                     <th>No</th>
@@ -61,8 +56,7 @@
                     </th>
                 </thead>
                 <tbody>
-                    @foreach($supplier as $s)
-                        @foreach($s->categories as $c)
+                        @foreach($category as $c)
                             @foreach($c->products as $p)
                         
                                                                     
@@ -86,18 +80,12 @@
                         </tr>  
                             @endforeach
                         @endforeach     
-                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 
-    @if(!isset($supplier[0]->name))
-    <div class="text-center">
-        <a href="{{url('/supplier')}}" class="text-danger">Add Supplier first</a>
-    </div>
-    @else
-    @endif
+    
     @include('product/modalProduct')
 
     <script type="text/javascript">

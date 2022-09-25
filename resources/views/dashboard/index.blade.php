@@ -3,8 +3,7 @@
 @section('main')
     <h1 class="mb-3">Ini Dashboard</h1>
 
-    @foreach($supplier as $s)
-        @foreach($s->categories as $c)
+    @foreach($category as $c)
         
         
         <div class="row">
@@ -30,7 +29,5 @@
                         </div>
                 
                 
-        @endforeach
     @endforeach
 
-@endsection

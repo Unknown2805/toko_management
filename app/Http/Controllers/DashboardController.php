@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Supplier;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -15,9 +14,9 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $supplier = Supplier::with('categories.products')->get();
+        $category = Category::with('products')->get();
                 
-        return view('dashboard.index',compact('supplier'));
+        return view('dashboard.index',compact('category'));
     }
 
     /**

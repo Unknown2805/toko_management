@@ -32,11 +32,9 @@
                                 <label for="formGroupExampleInput2" class="form-label">Category</label>
 
                                 <select class="choices form-select" aria-label="Default select example" name="category_id">
-                                    @foreach ($supplier as $s) 
-                                        @foreach ($s->categories as $c)                                            
+                                        @foreach ($category as $c)                                            
                                             <option value="{{$c->id}}">{{$c->name}}</option>
                                         @endforeach    
-                                    @endforeach
                                 </select>
                             </div>     
                         </div>
@@ -71,8 +69,7 @@
     </div>
 </div>
 
-@foreach ($supplier as $s)
-    @foreach($s->categories as $c)
+    @foreach($category as $c)
         @foreach ($c->products as $p)
             
         <div class="modal fade" id="editProduct{{$p ->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -117,11 +114,9 @@
                                         <label for="formGroupExampleInput2" class="form-label">Category</label>
     
                                         <select class="form-select" aria-label="Default select example" name="category_id">
-                                            @foreach ($supplier as $s) 
-                                                @foreach ($s->categories as $c)    
+                                                @foreach ($category as $c)    
                                                     <option value="{{$c->id}}">{{$c->name}}</option>
                                                 @endforeach
-                                            @endforeach
                                         </select>
                                     </div>                    
                                 </div>
@@ -159,10 +154,9 @@
         </div>
         @endforeach
     @endforeach
-@endforeach
 
-@foreach ($supplier as $s)
-    @foreach($s->categories as $c)
+
+    @foreach($category as $c)
         @foreach ($c->products as $p)
             
         <div class="modal fade" id="viewProduct{{$p ->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -203,4 +197,3 @@
         </div>
         @endforeach
     @endforeach
-@endforeach

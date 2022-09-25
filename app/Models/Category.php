@@ -13,12 +13,8 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'supplier_id'
     ];
-
-    public function supplier(){
-        return $this->belongsTo(Supplier::class);
-    }    
+   
     public function products(){
         return $this->hasMany(Product::class);
     }

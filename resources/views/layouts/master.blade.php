@@ -67,15 +67,6 @@
                                     <span>Dashboard</span>
                                 </a>
                             </li>
-
-                            <li class="sidebar-item">
-                                <a href="{{ url('/supplier') }}" class='sidebar-link'>
-                                    <i class="bi bi-person-fill"></i>
-                                    <span>Suppliers</span>
-                                </a>
-                            </li>
-                           
-
                             <li class="sidebar-item  has-sub">
                                 <a href="#" class='sidebar-link'>
                                     <i class="bi bi-cart-fill"></i>
