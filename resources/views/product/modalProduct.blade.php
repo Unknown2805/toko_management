@@ -57,8 +57,7 @@
                     
                         <input type="file" class="form-control" placeholder="Photo" name="image" autocomplete="off">
                     </div>
-                    
-                   
+                 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -85,7 +84,7 @@
                         <div class="modal-body">
                             <div class="col-12 col-md-12 mb-4">
                                 <div class="d-flex justify-content-center">
-                                    <img src="{{ $p->image == null ? asset('assets/images/samples/banana.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 150px;width:150px;border-radius:150px;">
+                                    <img src="{{ $p->image == null ? asset('assets/images/samples/image_default.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 150px;width:150px;border-radius:150px;">
                                 </div>
                             </div>
                             <hr>
@@ -171,7 +170,7 @@
                             <div class="row mb-4">
                                 <div class="col-12 col-md-4 mb-4">
                                     <div class="d-flex justify-content-center">
-                                        <img src="{{ $p->image == null ? asset('assets/images/samples/banana.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 160px;width:160px;border-radius:30px;">
+                                        <img src="{{ $p->image == null ? asset('assets/images/samples/image_default.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 160px;width:160px;border-radius:30px;">
                                     </div>
     
                                 </div>

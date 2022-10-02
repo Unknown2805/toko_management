@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ProductOut;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -32,30 +33,34 @@ class ProductController extends Controller
                     'category_id' => 'required',
 
                 ]);
-                $product =  new Product();
+                $product =  new Product();                
                 $product->name = $request->name;
                 $product->qty= $request->qty;
                 $product->desc = $request->desc;
                 $product->price = preg_replace("/[^0-9]/", "", $request->price);
                 $product->category_id = $request->category_id;
-
+                
                 if($request->image){
-
+                    
                     $img = $request->file('image');
                     $filename = $img->getClientOriginalName();
-            
+                    
                     if ($request->hasFile('image')) {
                         $request->file('image')->storeAs('/product',$filename);
                     }
                     $product->image = $request->file('image')->getClientOriginalName();
-
                 }
                 $product->save();
-                    // dd($product);
-
+                // dd($product);
+                
+                ProductOut::create([
+                    'product_id' => $product->id
+                ]);
                 return redirect()->back();
 
             }
+
+            
     //edit product
         public function edit(Request $request,$id)
             {

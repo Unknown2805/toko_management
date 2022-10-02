@@ -15,7 +15,7 @@
                                 <div class="card card-sm">
                                         <div class="text-center">
             
-                                            <img src="{{ $p->image == null ? asset('assets/images/samples/banana.jpg') : asset('/storage/product/'. $p->image) }}" class="card-img"  height="150px">
+                                            <img src="{{ $p->image == null ? asset('assets/images/samples/image_default.jpg') : asset('/storage/product/'. $p->image) }}" class="card-img"  height="150px">
                                         </div>
             
                                     <div class="card-body">
@@ -30,4 +30,5 @@
                 
                 
     @endforeach
+@endsection
 

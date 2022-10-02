@@ -38,7 +38,6 @@
                 <thead>
                         <th>No</th>
                         <th>Categories</th> 
-                        <th>Suppliers</th>               
                         <th><center>Action</center></th>
                     
                 </thead>

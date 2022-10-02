@@ -67,22 +67,29 @@
                                     <span>Dashboard</span>
                                 </a>
                             </li>
+                            <li class="sidebar-item">
+                                <a href="{{ url('/category') }}" class='sidebar-link'>
+                                    <i class="bi bi-grid-1x2-fill"></i>
+                                    <span>Categories</span>
+                                </a> 
+                            </li>
+                           
                             <li class="sidebar-item  has-sub">
                                 <a href="#" class='sidebar-link'>
                                     <i class="bi bi-cart-fill"></i>
                                     <span>Data Products</span>
                                 </a>
                                 <ul class="submenu ">
-                                    <li class="submenu-item {{ request()->is('in*') ? 'active' : '' }}">
-                                        <a href="{{ url('/category') }}" class='sidebar-link'>
-                                            <i class="bi bi-grid-1x2-fill"></i>
-                                            <span>Categories</span>
-                                        </a>                                    
-                                    </li>
                                     <li class="submenu-item {{ request()->is('/sale*') ? 'active' : '' }}">
                                         <a href="{{ url('/product') }}" class='sidebar-link'>
                                             <i class="bi bi-box2-fill"></i>
-                                            <span>Products</span>
+                                            <span>Products In</span>
+                                        </a>                                    
+                                    </li>
+                                    <li class="submenu-item {{ request()->is('/sale*') ? 'active' : '' }}">
+                                        <a href="{{ url('/product/out') }}" class='sidebar-link'>
+                                            <i class="bi bi-box2-fill"></i>
+                                            <span>Products Out</span>
                                         </a>                                    
                                     </li>
                                 </ul>

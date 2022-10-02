@@ -63,7 +63,7 @@
                         <tr>
                             <td>{{ $loop->iteration}}</td>
                             <td>
-                                <img src="{{ $p->image == null ? asset('assets/images/samples/banana.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 170px;width:170px;border-radius:10px;">
+                                <img src="{{ $p->image == null ? asset('assets/images/samples/image_default.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 170px;width:170px;border-radius:10px;">
                             </td>
                             <td>{{ $c->name}}</td>
                             <td>{{ $p->name }}</td>
@@ -74,7 +74,7 @@
                                 <div class="d-flex justify-content-center">                                    
                                     <a class="btn shadow btn-outline-warning btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#viewProduct{{ $p->id }}">View</i></a>
                                     <a class="btn shadow btn-outline-success btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#editProduct{{ $p->id }}">Edit</i></a>
-                                    <a class="btn shadow btn-outline-danger btn-md shadow" data-bs-toggle="modal" data-bs-target="#deleteProduct{{ $p->id }}">delete</i></a>
+                                    <a class="btn shadow btn-outline-danger btn-md shadow" data-bs-toggle="modal" data-bs-target="#deleteProduct{{ $p->id }}">Delete</i></a>
                                 </div>
                             </td>
                         </tr>  

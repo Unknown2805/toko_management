@@ -5,18 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaction extends Model
+class ProductOut extends Model
 {
     use HasFactory;
-
-    protected $table = 'transaction';
+    
+    protected $table = 'product_outs';
 
     protected $fillable = [
-        'untung',
-        'rugi',
-        'tgl_k',
+        'product_id',
         'qty_k',
-        'product_id'
+        'price_k'
     ];
 
     public function product(){
