@@ -67,41 +67,39 @@
                                     <span>Dashboard</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item">
+
+                            {{-- category --}}
+                            <li class="sidebar-item {{ request()->is('category*') ? 'active' : '' }}">
                                 <a href="{{ url('/category') }}" class='sidebar-link'>
                                     <i class="bi bi-grid-1x2-fill"></i>
                                     <span>Categories</span>
                                 </a> 
                             </li>
+
+                            {{-- product --}}
+                            <li class="sidebar-item {{ request()->is('product*') ? 'active' : '' }}">
+                                <a href="{{ url('/product') }}" class='sidebar-link'>
+                                    <i class="bi bi-box2-fill"></i>
+                                    <span>Products</span>
+                                </a>  
+                            </li>
                            
                             <li class="sidebar-item  has-sub">
                                 <a href="#" class='sidebar-link'>
-                                    <i class="bi bi-cart-fill"></i>
-                                    <span>Data Products</span>
+                                    <i class="bi bi-collection-fill"></i>                                
+                                    <span>History</span>
                                 </a>
                                 <ul class="submenu ">
-                                    <li class="submenu-item {{ request()->is('/sale*') ? 'active' : '' }}">
-                                        <a href="{{ url('/product') }}" class='sidebar-link'>
-                                            <i class="bi bi-box2-fill"></i>
-                                            <span>Products In</span>
-                                        </a>                                    
+                                    <li class="submenu-item {{ request()->is('reportProduct*') ? 'active' : '' }}">
+                                        <a href={{ url('/history/in') }}>History Product In</a>
                                     </li>
-                                    <li class="submenu-item {{ request()->is('/sale*') ? 'active' : '' }}">
-                                        <a href="{{ url('/product/out') }}" class='sidebar-link'>
-                                            <i class="bi bi-box2-fill"></i>
-                                            <span>Products Out</span>
-                                        </a>                                    
+                                    <li class="submenu-item {{ request()->is('reportPenjualan*') ? 'active' : '' }}">
+                                        <a href={{ url('/history/out') }}>History Product Out</a>
                                     </li>
                                 </ul>
                             </li>
 
                             @hasrole('admin')
-                            <li class="sidebar-item">
-                                <a href="{{ url('/trash') }}" class='sidebar-link'>
-                                    <i class="bi bi-trash-fill"></i>
-                                    <span>Trash</span>
-                                </a>
-                            </li>
 
                             <li class="sidebar-item  has-sub">
                                 <a href="#" class='sidebar-link'>

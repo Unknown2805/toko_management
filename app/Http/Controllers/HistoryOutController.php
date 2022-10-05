@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 use App\Models\Category;
+use App\Models\Product;
+use App\Models\ProductOut;
+use App\Models\HistoryOut;
+
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class HistoryOutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::all();
-        return view('category.index',compact('category'));
+        $category = Category::with('products.outs.historyouts')->get();
+                
+        return view('historyOut.index',compact('category'));
     }
 
     /**
@@ -22,6 +27,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         //
@@ -35,28 +41,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:categories,name',
-        ]);
-
-        $category = new Category();
-        $category->name = $request->name;
-
-        
-        // dd($category);
-        $category->save();
-
-        return redirect()->back();
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\HistoryOut  $historyOut
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(HistoryOut $historyOut)
     {
         //
     }
@@ -64,34 +58,22 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\HistoryOut  $historyOut
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,$id)
+    public function edit(HistoryOut $historyOut)
     {
-        $category = Category::where('id',$id)->firstOrFail();
-
-        $request->validate([
-            'name' => 'required',  
-        ]);
-
-        $category->name = $request->name;
-
-        // dd($category);
-        $category->update();
-
-        return redirect()->back();
-
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\HistoryOut  $historyOut
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, HistoryOut $historyOut)
     {
         //
     }
@@ -99,11 +81,12 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\HistoryOut  $historyOut
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
-        $data = Category::find($id);
+    public function destroy($id)
+    {
+        $data = HistoryOut::find($id);
 
         $data->delete();
 

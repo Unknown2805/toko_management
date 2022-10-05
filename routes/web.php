@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HistoryInController;
+use App\Http\Controllers\HistoryOutController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +44,7 @@ Route::controller(App\Http\Controllers\ProductController::class)
             Route::get('','index');
             Route::put('/add/{id}','price');
             Route::put('/edit/price/{id}', 'editPrice');
-            Route::put('/buy/{id}','buy');
+            Route::put('/sell/{id}','sell');
             Route::delete('/delete/{id}', 'destroy');
 
     });
@@ -55,6 +58,23 @@ Route::controller(App\Http\Controllers\CategoryController::class)
             Route::delete('/delete/{id}', 'destroy');
 
     });
+
+Route::controller(App\Http\Controllers\HistoryInController::class)
+->prefix('/history/in')
+->group(function(){
+        Route::get('/','index');
+        Route::delete('/delete/{id}', 'destroy');
+
+});
+
+Route::controller(App\Http\Controllers\HistoryOutController::class)
+->prefix('/history/out')
+->group(function(){
+        Route::get('/','index');
+        Route::put('/view/{id}', 'view');
+        Route::delete('/delete/{id}', 'destroy');
+
+});
 
 Auth::routes();
 

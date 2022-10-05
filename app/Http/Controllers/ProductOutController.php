@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\HistoryOut;
 use App\Models\ProductOut;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class ProductOutController extends Controller
     {
         $category = Category::with('products.outs')->get();
         $out = ProductOut::all();
-        return view('out.index',compact('category','out'));
+        return view('product.index',compact('category','out'));
     }
 
     
@@ -35,6 +36,7 @@ class ProductOutController extends Controller
             ProductOut::find($id)->update([
                 "price_k" => $price_k
             ]);
+            
         }
             // dd($product);
 
@@ -42,29 +44,12 @@ class ProductOutController extends Controller
 
 
     }
-    public function editPrice(Request $request,$id)
+    public function sell(Request $request,$id)
     {
-        $product = Product::where('id',$request->product_id)->first();
+        $this->validate($request, [
+            'qty_k' => 'required',     
 
-        $out = ProductOut::where('product_id',$request->product_id)->first();
-
-        $price_k = preg_replace("/[^0-9]/", "", $request->price_k);
-        
-        if($product->price <= $price_k){
-
-            ProductOut::find($id)->update([
-                "price_k" => $price_k
-            ]);
-        }
-
-            // dd($product);
-            return redirect()->back();
-       
-
-    }
-    public function buy(Request $request,$id)
-    {
-        
+        ]);
         $product = Product::where('id',$request->product_id)->first();
         $out = ProductOut::where('product_id',$request->product_id)->first();
 
@@ -74,6 +59,16 @@ class ProductOutController extends Controller
         ProductOut::find($id)->update([
             "qty_k" => $out->qty_k + $request->qty_k
         ]);
+
+        if($out->qty_k){
+            HistoryOut::create([
+                "product_out_id" => $request->product_id,
+                "price_k" => $out->price_k,
+                "qty_k" => $request->qty_k
+            ]);
+            
+        }
+       
             // dd($product);
 
         return redirect()->back();

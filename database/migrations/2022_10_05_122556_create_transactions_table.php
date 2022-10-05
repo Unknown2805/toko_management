@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('name')  ;
+            $table->unsignedBigInteger('history_out_id');
+            $table->integer('profit')->nullable();
+            $table->integer('loss')->nullable();
+            $table->integer('netto')->nullable();
+            $table->foreign('history_out_id')->references('id')->on('history_outs');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('transactions');
     }
 };
