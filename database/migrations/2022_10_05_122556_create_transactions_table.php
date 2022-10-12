@@ -19,7 +19,8 @@ return new class extends Migration
             $table->integer('profit')->nullable();
             $table->integer('loss')->nullable();
             $table->integer('netto')->nullable();
-            $table->foreign('history_out_id')->references('id')->on('history_outs');
+            $table->integer('total')->nullable();
+            $table->foreign('history_out_id')->references('id')->on('history_outs')->onDelete('cascade');
             $table->timestamps();
         });
     }

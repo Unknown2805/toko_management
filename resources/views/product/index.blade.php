@@ -77,7 +77,7 @@
                                             <div class="d-flex justify-content-center">  
                                                 @if($o->price_k == null) 
                                                 <a class="btn shadow btn-outline-primary btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#addPrice{{ $p->id }}">Add</i></a>                           
-                                                @elseif($o->qty_k == null )
+                                                @elseif($o->price_k )
                                                 <a class="btn shadow btn-outline-warning btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#sellProduct{{ $p->id }}">Sell</i></a>   
                                                 @elseif($p->qty === 0 )
                                                 <a class="btn shadow btn-outline-secondary btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#">Sold Out</i></a>   

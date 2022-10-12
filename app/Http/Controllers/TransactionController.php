@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\ProductOut;
+use App\Models\HistoryOut;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -14,7 +18,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $category = Category::with('products.outs.historyouts.transactions')->get();
+                
+        return view('transaction.index',compact('category'));
     }
 
     /**

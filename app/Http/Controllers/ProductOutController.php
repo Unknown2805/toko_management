@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Transaction;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\HistoryOut;
@@ -53,6 +54,7 @@ class ProductOutController extends Controller
         $product = Product::where('id',$request->product_id)->first();
         $out = ProductOut::where('product_id',$request->product_id)->first();
 
+        
         Product::find($id)->update([
             "qty" => $product->qty - $request->qty_k
         ]);
@@ -60,16 +62,26 @@ class ProductOutController extends Controller
             "qty_k" => $out->qty_k + $request->qty_k
         ]);
 
-        if($out->qty_k){
-            HistoryOut::create([
-                "product_out_id" => $request->product_id,
-                "price_k" => $out->price_k,
-                "qty_k" => $request->qty_k
-            ]);
+        $historyOut = HistoryOut::create([
+                            "product_out_id" => $request->product_id,
+                            "price_k" => $out->price_k,
+                            "qty_k" => $request->qty_k
+                        ]);
             
-        }
+            $total = $historyOut->price_k*$historyOut->qty_k ;
+            $netto = ($out->price_k - $product->price)* $historyOut->qty_k ;
+            
+        $transaction = Transaction::create([
+                "history_out_id" => $historyOut->id,
+                "profit" => $netto,
+                "loss" => 0,
+                "netto" => $netto,
+                "total" => $total
+            ]); 
+
        
-            // dd($product);
+       
+            // dd($total);
 
         return redirect()->back();
 

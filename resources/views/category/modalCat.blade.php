@@ -13,7 +13,7 @@
                     <div class="mb-3">
                         <label for="formGroupExampleInput2" class="form-label">Name</label>
                     
-                        <input type="name" class="form-control" placeholder="Name" name="name" autocomplete="off">
+                        <input type="name" class="form-control" placeholder="Name" name="name" autocomplete="off" autofocus>
                     </div>
            
     

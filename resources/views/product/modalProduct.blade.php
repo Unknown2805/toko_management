@@ -109,7 +109,7 @@
                                         <div class="mb-3">
                                             <label for="formGroupExampleInput2" class="form-label">Quantity Product</label>
                                             
-                                            <input type="number" class="form-control" placeholder="Quantity" name="qty" value="{{$p->qty}}" autocomplete="off">
+                                            <input type="number" min="1" class="form-control" placeholder="Quantity" name="qty" value="{{$p->qty}}" autocomplete="off">
                                         </div>
                                 
                                     </div>

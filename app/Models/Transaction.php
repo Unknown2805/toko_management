@@ -13,7 +13,8 @@ class Transaction extends Model
         'history_out_id',
         'profit',
         'loss',
-        'netto'
+        'netto',
+        'total'
     ];
 
     public function historyout(){

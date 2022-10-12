@@ -83,6 +83,12 @@
                                     <span>Products</span>
                                 </a>  
                             </li>
+                            <li class="sidebar-item {{ request()->is('transaction*') ? 'active' : '' }}">
+                                <a href="{{ url('/transaction') }}" class='sidebar-link'>
+                                    <i class="bi bi-bar-chart-line-fill"></i>
+                                    <span>Transaction</span>
+                                </a>  
+                            </li>
                            
                             <li class="sidebar-item  has-sub">
                                 <a href="#" class='sidebar-link'>
@@ -99,23 +105,6 @@
                                 </ul>
                             </li>
 
-                            @hasrole('admin')
-
-                            <li class="sidebar-item  has-sub">
-                                <a href="#" class='sidebar-link'>
-                                    <i class="bi bi-clipboard-check-fill"></i>                                
-                                    <span>Report</span>
-                                </a>
-                                <ul class="submenu ">
-                                    <li class="submenu-item {{ request()->is('reportProduct*') ? 'active' : '' }}">
-                                        <a href={{ url('reportProduct') }}>Report Product</a>
-                                    </li>
-                                    <li class="submenu-item {{ request()->is('reportPenjualan*') ? 'active' : '' }}">
-                                        <a href={{ url('reportPenjualan') }}>Report Penjualan</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            @endhasrole
 
                             <li class="sidebar-item  ">
                                 <a href="{{ route('logout') }}"

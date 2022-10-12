@@ -7,38 +7,26 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HistoryInController;
 use App\Http\Controllers\HistoryOutController;
+use App\Http\Controllers\TransactionController;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
-
 Route::controller(App\Http\Controllers\ProductController::class)
-    ->prefix('/product')
+->prefix('/product')
     ->group(function(){
         //in
             Route::get('/','index');
             Route::post('/add','store');
             Route::put('/edit/{id}', 'edit');
-
             Route::delete('/delete/{id}', 'destroy');
 
     });
 
-    Route::controller(App\Http\Controllers\ProductOutController::class)
-    ->prefix('/product/out')
+Route::controller(App\Http\Controllers\ProductOutController::class)
+->prefix('/product/out')
     ->group(function(){
         //out
             Route::get('','index');
@@ -48,9 +36,8 @@ Route::controller(App\Http\Controllers\ProductController::class)
             Route::delete('/delete/{id}', 'destroy');
 
     });
-
 Route::controller(App\Http\Controllers\CategoryController::class)
-    ->prefix('/category')
+->prefix('/category')
     ->group(function(){
             Route::get('/','index');
             Route::post('/add','store',);
@@ -61,20 +48,28 @@ Route::controller(App\Http\Controllers\CategoryController::class)
 
 Route::controller(App\Http\Controllers\HistoryInController::class)
 ->prefix('/history/in')
-->group(function(){
-        Route::get('/','index');
-        Route::delete('/delete/{id}', 'destroy');
-
-});
-
+    ->group(function(){
+            Route::get('/','index');
+            Route::delete('/delete/{id}', 'destroy');
+    });
 Route::controller(App\Http\Controllers\HistoryOutController::class)
 ->prefix('/history/out')
-->group(function(){
+    ->group(function(){
+            Route::get('/','index');
+            Route::put('/view/{id}', 'view');
+            Route::delete('/delete/{id}', 'destroy');
+
+    });
+
+Route::controller(App\Http\Controllers\TransactionController::class)
+->prefix('/transaction')
+    ->group(function(){
         Route::get('/','index');
         Route::put('/view/{id}', 'view');
-        Route::delete('/delete/{id}', 'destroy');
+        Route::delete('/delete/{id}', 'destroy'); 
+        });
 
-});
+
 
 Auth::routes();
 
