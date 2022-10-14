@@ -1,8 +1,49 @@
 @extends('layouts.master')
 
 @section('main')
-    <h1 class="mb-3">Ini Dashboard</h1>
 
+{{-- Profile & User --}}
+    <div class="row mb-4"> 
+        <div class="d-flex justify-content-between">
+            {{-- profile --}}
+            @if(!isset($profile[0]->name))
+                <a data-bs-toggle="modal" data-bs-target="#addProfile">
+                        
+                    <div class="text-start">
+                        <div class="avatar avatar-xl">
+                            <img src="{{ asset('/assets/images/faces/2.jpg')}}">
+                        </div>                    
+                    </div>
+
+                </a>
+            @else
+                @foreach($profile as $p)
+                    <a data-bs-toggle="modal" data-bs-target="#viewProfile{{ $p->id }}">                    
+                        <div class="text-start">
+                            <div class="avatar avatar-xl">
+                                <img src="{{ $p->image == null ? asset('assets/images/faces/2.jpg') : asset('/storage/profile/' .$p->image) }}" class="card-img" alt="..." style="height:70px;width:70px;" />
+                            </div>
+                            <span class="font-bold ms-1" style="font-size: 24px">
+                                {{ $p->name }}
+                            </span>
+                        </div>
+                    </a>
+                @endforeach
+            @endif
+
+            {{-- User --}}
+            <a data-bs-toggle="modal" data-bs-target="#viewUser{{Auth::user()->id}}">                
+                <div class="text-start">
+                    <div class="avatar avatar-xl">
+                        <img src="{{ Auth::user()->image == null ? asset('assets/images/faces/2.jpg') : asset('/storage/user/' .Auth::user()->image) }}" class="card-img" alt="..." style="height:70px;width:70px;" />
+                    </div>
+                </div>
+            </a>
+        </div>          
+    </div>  
+
+
+{{-- Chart --}}
     <div class="col-12 col-md-12">
         <div class="card shadow">
             <div class="card-header">
@@ -29,7 +70,7 @@
         </div>
     </div>
 
-
+{{-- Top Ten Product --}}
     <div class="card-body">
 
         <div class="row">
@@ -71,6 +112,8 @@
         </div>
 
     </div>
+
+@include('dashboard/modalDashboard')
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

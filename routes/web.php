@@ -65,11 +65,17 @@ Route::controller(App\Http\Controllers\TransactionController::class)
 ->prefix('/transaction')
     ->group(function(){
         Route::get('/','index');
-        Route::put('/view/{id}', 'view');
+        });
+Route::controller(App\Http\Controllers\DashboardController::class)
+->prefix('/dashboard')
+    ->group(function(){
+        Route::get('/','index');
+        Route::get('/view', 'view');
+        Route::post('/add/profile', 'store');
+        Route::put('/edit/profile/{id}', 'edit');
+        Route::put('/edit/user/{id}', 'editUser');
         Route::delete('/delete/{id}', 'destroy'); 
         });
-
-
 
 Auth::routes();
 

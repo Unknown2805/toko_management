@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductOut;
-use App\Models\HistoryOut;
 use App\Models\Transaction;
+use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -17,9 +18,12 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
 
+//view 
     public function index()
     {
         $category = Category::with('products.outs')->limit(10)->get();
+        $profile = Profile::all();
+        $user = User::all();
         $data = Transaction::all();
         
                             
@@ -41,76 +45,102 @@ class DashboardController extends Controller
     
                 
             }
-            return view('dashboard.index',compact('category'))
+            return view('dashboard.index',compact('category','profile','user'))
             -> with('data_month_un_p', $data_month_un_p)
             -> with('data_month_rug_p', $data_month_rug_p);
             ;
                       
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+//add profile
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'image' => 'file|max:3072',
+            'name',
+            'address',
+        ]);
+        $profile =  new Profile();                
+        $profile->name = $request->name;
+        $profile->address= $request->address;
+        
+        if($request->image){
+            
+            $img = $request->file('image');
+            $filename = $img->getClientOriginalName();
+            
+            if ($request->hasFile('image')) {
+                $request->file('image')->storeAs('/profile',$filename);
+            }
+            $profile->image = $request->file('image')->getClientOriginalName();
+        }
+        // dd($profile);
+        $profile->save();
+
+        return redirect()->back();
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+//edit profile
+    public function edit(Request $request,$id){
+        $data = Profile::where('id',$id)->firstOrFail();
+
+        $request->validate([
+            'image' => 'file|max:3072',
+            'address',
+            'name',
+            
+        ]);
+
+        $data->name = $request->name;
+        $data->address = $request->address; 
+
+        if($request->image){
+
+            $img = $request->file('image');
+            $filename = $img->getClientOriginalName();
+
+            if ($request->hasFile('image')) {
+                $request->file('image')->storeAs('/profile',$filename);
+            }
+            $data->image = $request->file('image')->getClientOriginalName();
+        
+        }
+        // dd($data);
+        $data->update();
+
+        return redirect()->back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+//edit user
+    public function editUser(Request $request,$id){
+        $data = User::where('id',$id)->firstOrFail();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $request->validate([
+            'image' => 'file|max:3072',
+            'email',
+            'name',
+            
+        ]);
+
+        $data->name = $request->name;
+        $data->email = $request->email; 
+
+        if($request->image){
+
+            $img = $request->file('image');
+            $filename = $img->getClientOriginalName();
+
+            if ($request->hasFile('image')) {
+                $request->file('image')->storeAs('/user',$filename);
+            }
+            $data->image = $request->file('image')->getClientOriginalName();
+        
+        }
+        // dd($data);
+        $data->update();
+
+        return redirect()->back();
     }
 }

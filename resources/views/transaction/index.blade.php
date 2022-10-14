@@ -20,9 +20,12 @@
                         </th>
                         <th class="text-danger">
                             <span>Loss</span>
+                            <i class="bi bi-arrow-down"></i>
+                        </th>
+                        <th class="text-success">                            
+                            <span>Netto</span>
                             <i class="bi bi-arrow-up"></i>
                         </th>
-                        <th class="text-success">Netto</th>
                         
                     
                     </thead>

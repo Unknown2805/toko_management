@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@toko',
             'password' => bcrypt('password'),
-            'gambar' => null
+            'image' => null
 
         ]);
 
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'name' => 'Karyawan',
             'email' => 'karyawan@toko',
             'password' => bcrypt('password'),
-            'gambar' => null
+            'image' => null
         ]);
 
         $manager->assignRole('karyawan');

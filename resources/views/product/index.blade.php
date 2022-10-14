@@ -44,7 +44,6 @@
            
             <table class="table" id="table1">
                 <thead>
-                    <th>No</th>
                     <th>Photo</th>
                     <th>Category</th>
                     <th>Name</th>
@@ -57,12 +56,11 @@
                 
                 </thead>
                 <tbody>
-                        @foreach($category as $key => $c)
-                            @foreach($c->products as  $p)
+                        @foreach($category as  $c)
+                            @foreach($c->products as $key => $p)
                                 @foreach($p->outs as $o)
                                                                     
-                                    <tr>
-                                        <td>{{ ++$key}}</td>
+                                    <tr>    
                                         <td>
                                             <img src="{{ $p->image == null ? asset('assets/images/samples/image_default.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 170px;width:170px;border-radius:10px;">
                                         </td>

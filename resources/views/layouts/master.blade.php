@@ -86,7 +86,7 @@
                             <li class="sidebar-item {{ request()->is('transaction*') ? 'active' : '' }}">
                                 <a href="{{ url('/transaction') }}" class='sidebar-link'>
                                     <i class="bi bi-bar-chart-line-fill"></i>
-                                    <span>Transaction</span>
+                                    <span>Products Sale</span>
                                 </a>  
                             </li>
                            
