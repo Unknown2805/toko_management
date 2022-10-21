@@ -4,13 +4,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Toko Management</title>
-        <link rel="stylesheet" href={{ asset('assets/css/main/app.css') }}>
-        <link rel="stylesheet" href={{ asset('assets/css/main/app-dark.css') }}>
+        <link rel="stylesheet" href={{asset('assets/css/main/app.css')}}>
+        <link rel="stylesheet" href={{asset('assets/css/main/app-dark.css')}}>
+        <link rel="stylesheet" href={{asset('assets/extensions/choices.js/public/assets/styles/choices.css')}}>
+        <link rel="stylesheet" href={{asset('assets/extensions/simple-datatables/style.css')}}>
+        <link rel="stylesheet" href={{asset('assets/css/pages/simple-datatables.css')}}>
         <link rel="shortcut icon" href={{ asset('assets/images/logo/favicon.svg') }} type="image/x-icon">
         <link rel="shortcut icon" href={{ asset('assets/images/logo/favicon.png') }} type="image/png">
-        <link rel="stylesheet" href={{asset('assets/extensions/choices.js/public/assets/styles/choices.css')}}>
-        <link rel="stylesheet" href={{ asset('assets/css/pages/simple-datatables.css') }}>
-
+        <link rel="stylesheet" href={{ asset('assets/css/shared/iconly.css')}}>
+   
 
 
 
@@ -63,7 +65,7 @@
                             {{-- dashboard --}}
                             <li class="sidebar-item {{ request()->is('dashboard*') ? 'active' : '' }}">
                                 <a href={{ url('/dashboard') }} class='sidebar-link'>
-                                    <i class="bi bi-grid-fill"></i>
+                                    <i class="bi bi-grid"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
@@ -71,7 +73,7 @@
                             {{-- category --}}
                             <li class="sidebar-item {{ request()->is('category*') ? 'active' : '' }}">
                                 <a href="{{ url('/category') }}" class='sidebar-link'>
-                                    <i class="bi bi-grid-1x2-fill"></i>
+                                    <i class="bi bi-grid-1x2"></i>
                                     <span>Categories</span>
                                 </a> 
                             </li>
@@ -79,39 +81,36 @@
                             {{-- product --}}
                             <li class="sidebar-item {{ request()->is('product*') ? 'active' : '' }}">
                                 <a href="{{ url('/product') }}" class='sidebar-link'>
-                                    <i class="bi bi-box2-fill"></i>
+                                    <i class="bi bi-box2"></i>
                                     <span>Products</span>
                                 </a>  
                             </li>
                             <li class="sidebar-item {{ request()->is('transaction*') ? 'active' : '' }}">
                                 <a href="{{ url('/transaction') }}" class='sidebar-link'>
-                                    <i class="bi bi-bar-chart-line-fill"></i>
+                                    <i class="bi bi-bar-chart-line"></i>
                                     <span>Products Sale</span>
                                 </a>  
-                            </li>
+                            </li>   
+                            <li class="sidebar-item {{ request()->is('history/in*') ? 'active' : '' }}">
+                                <a href="{{ url('/history/in') }}" class='sidebar-link'>
+                                    <i class="bi bi-box-arrow-in-down-right"></i>
+                                    <span>History In</span>
+                                </a>  
+                            </li>   
+                            <li class="sidebar-item {{ request()->is('history/out*') ? 'active' : '' }}">
+                                <a href="{{ url('/history/out') }}" class='sidebar-link'>
+                                    <i class="bi bi-box-arrow-in-up-right"></i>
+                                    <span>History Out</span>
+                                </a>  
+                            </li>                                                                                  
+
                            
-                            <li class="sidebar-item  has-sub">
-                                <a href="#" class='sidebar-link'>
-                                    <i class="bi bi-collection-fill"></i>                                
-                                    <span>History</span>
-                                </a>
-                                <ul class="submenu ">
-                                    <li class="submenu-item {{ request()->is('reportProduct*') ? 'active' : '' }}">
-                                        <a href={{ url('/history/in') }}>History Product In</a>
-                                    </li>
-                                    <li class="submenu-item {{ request()->is('reportPenjualan*') ? 'active' : '' }}">
-                                        <a href={{ url('/history/out') }}>History Product Out</a>
-                                    </li>
-                                </ul>
-                            </li>
-
-
                             <li class="sidebar-item  ">
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();"
                                     class="sidebar-link">
-                                    <i class="bi bi-arrow-left-square-fill"></i>
+                                    <i class="bi bi-arrow-left-square"></i>
                                     <span>Logout</span>
                                 </a>
 
@@ -135,11 +134,13 @@
         </div>
         {{-- @include('sweetalert::alert') --}}
 
-        <script src={{ asset('assets/js/app.js') }}></script>
+        <script src="assets/js/bootstrap.js"></script>
+        <script src="assets/js/app.js"></script>
+        <script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
+        <script src="assets/js/pages/simple-datatables.js"></script>
+        <script src="assets/extensions/choices.js/public/assets/scripts/choices.js"></script>
+        <script src="assets/js/pages/form-element-select.js"></script>
 
-        <script src={{ asset('assets/js/pages/dashboard.js') }}></script>
-        <script src={{ asset('assets/js/extensions/simple-datatables.js') }}></script>
-        <script src={{ asset('assets/js/extensions/ui-chartjs.js') }}></script>
 
     </body>
 

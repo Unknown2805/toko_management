@@ -7,85 +7,25 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductOut;
 use App\Models\HistoryOut;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\ProductsExport;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+//view
     public function index()
-    {
-        $category = Category::with('products.outs.historyouts.transactions')->get();
-                
-        return view('transaction.index',compact('category'));
-    }
+        {
+            $category = Category::with('products.outs.historyouts.transactions')->get();
+                    
+            return view('transaction.index',compact('category'));
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Transaction $transaction)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Transaction $transaction)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Transaction $transaction)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Transaction $transaction)
-    {
-        //
-    }
+//pdf
+    public function sale_pdf()
+        {
+            $category = Category::with('products.outs.historyouts.transactions')->get();
+            $pdf = Pdf::loadview('transaction.pdf',['category'=>$category]);
+            return $pdf->download('Products Sale.pdf');
+        }
 }

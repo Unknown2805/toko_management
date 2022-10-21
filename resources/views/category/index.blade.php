@@ -1,5 +1,7 @@
 @extends('layouts.master')
+
 @section('main')
+    {{-- delete modal --}}
         @foreach ($category as $c)
             <div class="modal fade" id="deleteCat{{ $c->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -24,42 +26,54 @@
                 </div>
             </div>
         @endforeach
-
-    <h2 class="mb-3">Category</h2>
     
-    <div class="card">
-        <div class="card-body">
+        <h2 class="mb-3">Category</h2>
+    {{-- table --}}
+        <div class="card">
+            <div class="card-body">
 
-            <button type="button" class="btn btn-primary btn-md mb-3" data-bs-toggle="modal" data-bs-target="#addCat">
-                Add +
-            </button>
-            <table class="table" id="table1">
-                
-                <thead>
-                        <th>No</th>
-                        <th>Categories</th> 
-                        <th><center>Action</center></th>
+                <div class="row">
+                    <div class="col-12 col-md-1">
+                        <button type="button" class="btn btn-primary btn-md mb-3" data-bs-toggle="modal" data-bs-target="#addCat">
+                            Add +
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <a class="btn btn-danger" href={{url('category/pdf')}}>
+                            <span class="me-1"><i class="bi bi-printer-fill"></i></span>
+                            PDF
+                        </a>
+                    </div>
+                </div>
+
+                <table class="table" id="table1">
                     
-                </thead>
-                <tbody>
-                        @foreach ($category as $c)
+                    <thead>
+                            <th>No</th>
+                            <th>Categories</th> 
+                            <th><center>Action</center></th>
+                        
+                    </thead>
+                    <tbody>
+                        @php $i=1 @endphp
+                            @foreach ($category as $c)
 
-                            <tr>
-                                <td>{{ $loop->iteration}}</td> 
-                                <td>{{ $c->name }}</td>                        
-                                <td>
-                                    <center>
-                                        <a class="btn shadow btn-outline-success btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#editCat{{ $c->id }}">Edit</i></a>
-                                        <a class="btn shadow btn-outline-danger btn-md shadow" data-bs-toggle="modal" data-bs-target="#deleteCat{{ $c->id }}">delete</i></a>
-                                    </center>
-                                </td>
-                            </tr> 
-                                
-                        @endforeach
-                </tbody>
-            </table>
+                                <tr>
+                                    <td>{{ $i++}}</td> 
+                                    <td>{{ $c->name }}</td>                        
+                                    <td>
+                                        <center>
+                                            <a class="btn shadow btn-outline-success btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#editCat{{ $c->id }}">Edit</i></a>
+                                            <a class="btn shadow btn-outline-danger btn-md shadow" data-bs-toggle="modal" data-bs-target="#deleteCat{{ $c->id }}">delete</i></a>
+                                        </center>
+                                    </td>
+                                </tr> 
+                                    
+                            @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
     @include('category/modalCat')
 

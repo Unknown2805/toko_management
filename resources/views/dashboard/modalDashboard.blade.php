@@ -49,7 +49,7 @@
 
                         <div class="avatar avatar-lg">
 
-                            <img src="{{ $p->image == null ? asset('assets/images/faces/2.jpg') : asset('/storage/profile/' .$p->image) }}" class="card-img" alt="..." style="height:80px;width:80px;" />
+                            <img src="{{ $p->image == null ? asset('images/bg/image.jp') : asset('/storage/profile/' .$p->image) }}" class="card-img" alt="..." style="height:80px;width:80px;" />
                         </div>
 
                     </div>
@@ -98,7 +98,7 @@
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">Photo Profile</label>
                                     <div class="col-md-8 mb-3">
-                                        <img src="{{ $p->image == null ? asset('assets/images/faces/2.jpg') : asset('/storage/profile/' .$p->image) }}" class="card-img" alt="..." style="height:180px;"/>
+                                        <img src="{{ $p->image == null ? asset('images/bg/image.jp') : asset('/storage/profile/' .$p->image) }}" class="card-img" alt="..." style="height:180px;border-radius:15px"/>
                                     </div>
                                 <input type="file" class="form-control" name="image" autocomplete="off">
                             </div>
@@ -131,7 +131,7 @@
 
                     <div class="avatar avatar-xl">
 
-                        <img src="{{ Auth::user()->image == null ? asset('assets/images/faces/2.jpg') : asset('/storage/user/' .Auth::user()->image) }}" class="card-img" alt="..." style="height:80px;width:80px;" />
+                        <img src="{{ Auth::user()->image == null ? asset('images/bg/user.jpg') : asset('/storage/user/' .Auth::user()->image) }}" class="card-img" alt="..." style="height:80px;width:80px;" />
                     </div>
 
                 </div>
@@ -182,7 +182,7 @@
                             <div class="mb-3">
                                 <label for="formGroupExampleInput2" class="form-label">Photo Profile</label>
                                     <div class="col-md-8 mb-3">
-                                        <img src="{{ Auth::user()->image == null ? asset('assets/images/faces/2.jpg') : asset('/storage/user/' .Auth::user()->image) }}" class="card-img" alt="..." style="height:180px;"/>
+                                        <img src="{{ Auth::user()->image == null ? asset('images/bg/user.jpg') : asset('/storage/user/' .Auth::user()->image) }}" class="card-img" alt="..." style="height:180px;border-radius:15px"/>
                                     </div>
                                 <input type="file" class="form-control" name="image" autocomplete="off">
                             </div>

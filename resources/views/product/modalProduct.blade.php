@@ -30,13 +30,16 @@
                         <div class="row">
                             <div class="col-8 col-md-8">
                                 <div class="mb-3">
-                                    <label for="formGroupExampleInput2" class="form-label">Category</label>
-
-                                    <select class="choices form-select" aria-label="Default select example" name="category_id">
+                                    
+                                    <label>Categories</label>
+                                    <div class="form-group">
+                                        <select class="choices form-select" aria-label="Default select example" name="category_id">
                                             @foreach ($category as $c)                                            
                                                 <option value="{{$c->id}}">{{$c->name}}</option>
                                             @endforeach    
-                                    </select>
+                                        </select>
+                                    </div>
+                                
                                 </div>     
                             </div>
                             <div class="col-4 col-md-4">
@@ -68,7 +71,7 @@
             </div>
         </div>
     </div>
-{{-- detail Product(edit) --}}
+{{-- detail product(edit) --}}
     @foreach($category as $c)
         @foreach ($c->products as $p)
             @foreach ($p->outs as $o)
@@ -116,13 +119,15 @@
                                     <div class="col-6 col-md-6">
 
                                         <div class="mb-3">
-                                            <label for="formGroupExampleInput2" class="form-label">Category</label>
+                                            <label for="formGroupExampleInput2" class="form-label">Categories</label>
         
-                                            <select class="form-select" aria-label="Default select example" name="category_id">
-                                                    @foreach ($category as $c)    
+                                            <div class="form-group">
+                                                <select class="choices form-select" aria-label="Default select example" name="category_id">
+                                                    @foreach ($category as $c)                                            
                                                         <option value="{{$c->id}}">{{$c->name}}</option>
-                                                    @endforeach
-                                            </select>
+                                                    @endforeach    
+                                                </select>
+                                            </div>
                                         </div>    
         
                                     </div>

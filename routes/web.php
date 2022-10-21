@@ -19,6 +19,7 @@ Route::controller(App\Http\Controllers\ProductController::class)
     ->group(function(){
         //in
             Route::get('/','index');
+            Route::get('/pdf','product_pdf');
             Route::post('/add','store');
             Route::put('/edit/{id}', 'edit');
             Route::delete('/delete/{id}', 'destroy');
@@ -40,6 +41,7 @@ Route::controller(App\Http\Controllers\CategoryController::class)
 ->prefix('/category')
     ->group(function(){
             Route::get('/','index');
+            Route::get('/pdf','category_pdf');
             Route::post('/add','store',);
             Route::put('/edit/{id}', 'edit');
             Route::delete('/delete/{id}', 'destroy');
@@ -50,21 +52,20 @@ Route::controller(App\Http\Controllers\HistoryInController::class)
 ->prefix('/history/in')
     ->group(function(){
             Route::get('/','index');
-            Route::delete('/delete/{id}', 'destroy');
+            Route::get('/pdf','his_in_pdf');
     });
 Route::controller(App\Http\Controllers\HistoryOutController::class)
 ->prefix('/history/out')
     ->group(function(){
             Route::get('/','index');
-            Route::put('/view/{id}', 'view');
-            Route::delete('/delete/{id}', 'destroy');
-
+            Route::get('/pdf','his_out_pdf');
     });
 
 Route::controller(App\Http\Controllers\TransactionController::class)
 ->prefix('/transaction')
     ->group(function(){
         Route::get('/','index');
+        Route::get('/pdf','sale_pdf');
         });
 Route::controller(App\Http\Controllers\DashboardController::class)
 ->prefix('/dashboard')

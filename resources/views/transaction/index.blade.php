@@ -1,11 +1,16 @@
 @extends('layouts.master')
+
 @section('main')
 
-    <h2 class="mb-3">Product Sale</h2>
+    {{-- table --}}
+        <h2 class="mb-3">Product Sale</h2>
         
         <div class="card">
             <div class="card-body">
-
+                <a class="btn btn-danger" href={{url('transaction/pdf')}}>
+                    <span class="me-1"><i class="bi bi-printer-fill"></i></span>
+                    PDF
+                </a>
                 <table class="table" id="table1">
                     <thead>
                         <th>No</th>
@@ -30,6 +35,7 @@
                     
                     </thead>
                     <tbody>
+                        @php $i=1 @endphp
                         @foreach($category as $key => $c)
                             @foreach($c->products as $p)
                                 @foreach($p->outs as $o)
@@ -37,7 +43,7 @@
                                         @foreach($ho->transactions as $t)
                                                                         
                                         <tr>
-                                            <td>{{ ++$key}}</td>                                            
+                                            <td>{{ $i++}}</td>                                            
                                             <td>{{ $c->name }}</td>
                                             <td>{{ $p->name }}</td>
                                             <td>{{ $ho->qty_k }}</td>  
@@ -46,11 +52,9 @@
                                             <td class="text-success">Rp. @money((float)$t->profit)</td>
                                             <td class="text-danger">Rp. @money((float)$t->loss)</td>
                                             <td class="text-success">Rp. @money((float)$t->netto)</td>                                                                              
-                                                                           
-                                           
+                                                                        
+                                        
                                         </tr> 
-
-
                                         @endforeach
                                     @endforeach
                                 @endforeach

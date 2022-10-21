@@ -2,111 +2,69 @@
 
 namespace App\Http\Controllers;
 use App\Models\Category;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\ProductsExport;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+// view
     public function index()
-    {
-        $category = Category::all();
-        return view('category.index',compact('category'));
-    }
+        {
+            $category = Category::all();
+            return view('category.index',compact('category'));
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+//pdf
+    public function category_pdf()
+        {
+            $category = Category::get();    
+            $pdf = Pdf::loadview('category.pdf',['category'=>$category]);
+            return $pdf->download('Category.pdf');
+        }
+//add
     public function store(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required|unique:categories,name',
-        ]);
+        {
+            $this->validate($request, [
+                'name' => 'required|unique:categories,name',
+            ]);
 
-        $category = new Category();
-        $category->name = $request->name;
+            $category = new Category();
+            $category->name = $request->name;
 
-        
-        // dd($category);
-        $category->save();
+            
+            // dd($category);
+            $category->save();
 
-        return redirect()->back();
+            return redirect()->back();
 
-    }
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
+//edit
     public function edit(Request $request,$id)
-    {
-        $category = Category::where('id',$id)->firstOrFail();
+        {
+            $category = Category::where('id',$id)->firstOrFail();
 
-        $request->validate([
-            'name' => 'required',  
-        ]);
+            $request->validate([
+                'name' => 'required',  
+            ]);
 
-        $category->name = $request->name;
+            $category->name = $request->name;
 
-        // dd($category);
-        $category->update();
+            // dd($category);
+            $category->update();
 
-        return redirect()->back();
+            return redirect()->back();
 
-    }
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Category $category)
-    {
-        //
-    }
+//delete
+    public function destroy($id)
+        {
+            $data = Category::find($id);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id){
-        $data = Category::find($id);
+            $data->delete();
 
-        $data->delete();
-
-        return redirect()->back();
-    }
+            return redirect()->back();
+        }
 }
