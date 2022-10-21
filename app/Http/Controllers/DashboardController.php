@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductOut;
+use App\Models\HistoryOut;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Profile;
@@ -21,12 +22,22 @@ class DashboardController extends Controller
 //view 
     public function index()
     {
-        $category = Category::with('products.outs')->limit(10)->get();
+        $category = Category::with('products.outs')->get();
         $profile = Profile::all();
+        $product = Product::all();
+        $historyOuts = HistoryOut::all();
         $user = User::all();
         $data = Transaction::all();
         
                             
+        foreach ($category as $c) {
+            foreach ($c->products as $p) {
+                foreach ($p->outs as $o) {
+                    $top = $o->orderBy('qty_k','desc');
+                }
+            }
+        }
+
             $this_year = Carbon::now()->format('Y');
             $month_p = Transaction::where('created_at','like', $this_year.'%')->get();
             
@@ -39,13 +50,12 @@ class DashboardController extends Controller
                 $bulan_in_p= explode('-',carbon::parse($a->created_at)->format('Y-m-d'))[1];
     
                     $data_month_un_p[(int) $bulan_in_p]+= $a->netto; 
-                    $data_month_rug_p[(int) $bulan_in_p]+=$a->loss;
-               
-            
-    
-                
+                    $data_month_rug_p[(int) $bulan_in_p]+=$a->loss;                                               
             }
-            return view('dashboard.index',compact('category','profile','user'))
+
+            $stock = $product->sum('qty');
+            $sold = $historyOuts->sum('qty_k');
+            return view('dashboard.index',compact('category','profile','user','stock','sold','top'))
             -> with('data_month_un_p', $data_month_un_p)
             -> with('data_month_rug_p', $data_month_rug_p);
             ;

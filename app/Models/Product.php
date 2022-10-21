@@ -29,6 +29,6 @@ class Product extends Model
     }
 
     public function historyins(){
-        return $this->hasMany(HistoryIn::class);
+        return $this->hasMany(HistoryIn::class,'');
     }
 }

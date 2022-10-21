@@ -1,30 +1,38 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductOut;
 use App\Models\HistoryIn;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\ProductsExport;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    //Auth
-        public function __construct()
+//Auth
+    public function __construct()
             {
                 $this->middleware('auth');
             }
-    //index product  
-        public function index()
+//view  
+    public function index()
             {
                 $category = Category::with('products.outs')->get();
                 
                 return view('product.index',compact('category'));
             }
-
-
-    // add product
-        public function store(Request $request)
+//pdf
+    public function product_pdf()
+        {
+            $category = Category::with('products.outs')->get();
+            $pdf = Pdf::loadview('product.pdf',['category'=>$category]);
+            return $pdf->download('Products.pdf');
+        }
+//add 
+    public function store(Request $request)
             {
                 
                 $this->validate($request, [
@@ -69,8 +77,8 @@ class ProductController extends Controller
             }
 
             
-    //edit product
-        public function edit(Request $request,$id)
+//edit
+    public function edit(Request $request,$id)
             {
                 $product = Product::where('id',$id)->firstOrFail();
 
@@ -120,7 +128,7 @@ class ProductController extends Controller
 
             }
 
-    //delete product
+//delete
     public function destroy($id)
         {
             $data = Product::find($id);

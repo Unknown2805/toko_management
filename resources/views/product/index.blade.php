@@ -1,5 +1,7 @@
 @extends('layouts.master')
+
 @section('main')
+    {{-- delete modal --}}
         @foreach ($category as $c)
             @foreach ($c->products as $p)
                 
@@ -28,70 +30,80 @@
 
             @endforeach
         @endforeach
+    {{-- table --}}
+        <h2 class="mb-3">Products</h2>
+            
+        <div class="card">
+            <div class="card-body">
 
-    <h2 class="mb-3">Products</h2>
-    
-    <div class="card">
-        <div class="card-body">
-
-          
-                <div class="col-12 col-md-12">
-                    <button type="button" class="btn btn-primary btn-md mb-3" data-bs-toggle="modal" data-bs-target="#addProduct">
-                        Add +
-                    </button>
+                <div class="row">
+                    <div class="col-12 col-md-1">
+                        <button type="button" class="btn btn-primary btn-md mb-3" data-bs-toggle="modal" data-bs-target="#addProduct">
+                            Add +
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <a class="btn btn-danger" href={{url('product/pdf')}}>
+                            <span class="me-1"><i class="bi bi-printer-fill"></i></span>
+                            PDF
+                        </a>
+                    </div>
                 </div>
+    
+                <table class="table" id="table1">
+                    <thead>
+                        <th>No</th>
+                        <th>Photo</th>
+                        <th>Category</th>
+                        <th>Name</th>
+                        <th>Stock</th>
+                        <th>                                
+                            <div class="d-flex justify-content-center">                                    
+                                Action
+                            </div>
+                        </th>
+                    
+                    </thead>
+                    <tbody>
+                        @php $i=1 @endphp
 
-           
-            <table class="table" id="table1">
-                <thead>
-                    <th>Photo</th>
-                    <th>Category</th>
-                    <th>Name</th>
-                    <th>Stock</th>
-                    <th>                                
-                        <div class="d-flex justify-content-center">                                    
-                            Action
-                        </div>
-                    </th>
-                
-                </thead>
-                <tbody>
-                        @foreach($category as  $c)
-                            @foreach($c->products as $key => $p)
-                                @foreach($p->outs as $o)
-                                                                    
-                                    <tr>    
-                                        <td>
-                                            <img src="{{ $p->image == null ? asset('assets/images/samples/image_default.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 170px;width:170px;border-radius:10px;">
-                                        </td>
-                                        <td>{{ $c->name }}</td>
-                                        <td>{{ $p->name }}</td>
-                                        @if($p->qty)
-                                        <td>{{ $p->qty }}</td>
-                                        @elseif($p->qty === 0 )
-                                        <td class="text-secondary"><i>Sold Out</i></td>
-                                        @endif
-                                        <td>                                            
-                                            <div class="d-flex justify-content-center">  
-                                                @if($o->price_k == null) 
-                                                <a class="btn shadow btn-outline-primary btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#addPrice{{ $p->id }}">Add</i></a>                           
-                                                @elseif($o->price_k )
-                                                <a class="btn shadow btn-outline-warning btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#sellProduct{{ $p->id }}">Sell</i></a>   
-                                                @elseif($p->qty === 0 )
-                                                <a class="btn shadow btn-outline-secondary btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#">Sold Out</i></a>   
-                                                @endif
-                                                <a class="btn shadow btn-outline-info btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#detailProduct{{ $p->id }}">Detail</i></a>
-                                                <a class="btn shadow btn-outline-danger btn-md shadow" data-bs-toggle="modal" data-bs-target="#deleteProduct{{ $p->id }}">Delete</i></a>
-                                            </div>
-                                        </td>
-                                    </tr>  
+                            @foreach($category as  $c)
+                                @foreach($c->products as $key => $p)
+                                    @foreach($p->outs as $o)
+                                                                        
+                                        <tr>    
+                                            <td>{{ $i++ }}</td>
+                                            <td>
+                                                <img src="{{ $p->image == null ? asset('images/bg/image.png') : asset('/storage/product/'. $p->image) }}" style="height: 170px;width:170px;border-radius:10px;">
+                                            </td>
+                                            <td>{{ $c->name }}</td>
+                                            <td>{{ $p->name }}</td>
+                                            @if($p->qty)
+                                            <td>{{ $p->qty }}</td>
+                                            @elseif($p->qty === 0 )
+                                            <td class="text-secondary"><i>Sold Out</i></td>
+                                            @endif
+                                            <td>                                            
+                                                <div class="d-flex justify-content-center">  
+                                                    @if($o->price_k == null) 
+                                                    <a class="btn shadow btn-outline-primary btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#addPrice{{ $p->id }}">Add</i></a>                           
+                                                    @elseif($o->price_k )
+                                                    <a class="btn shadow btn-outline-warning btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#sellProduct{{ $p->id }}">Sell</i></a>   
+                                                    @elseif($p->qty === 0 )
+                                                    <a class="btn shadow btn-outline-secondary btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#">Sold Out</i></a>   
+                                                    @endif
+                                                    <a class="btn shadow btn-outline-info btn-md shadow me-2" data-bs-toggle="modal" data-bs-target="#detailProduct{{ $p->id }}">Detail</i></a>
+                                                    <a class="btn shadow btn-outline-danger btn-md shadow" data-bs-toggle="modal" data-bs-target="#deleteProduct{{ $p->id }}">Delete</i></a>
+                                                </div>
+                                            </td>
+                                        </tr>  
+                                    @endforeach
                                 @endforeach
-                            @endforeach
-                        @endforeach     
-                </tbody>
-            </table>
+                            @endforeach     
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
     
     @include('product/modalProduct')
