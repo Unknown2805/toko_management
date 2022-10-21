@@ -33,7 +33,7 @@
     {{-- table --}}
         <h2 class="mb-3">Products</h2>
             
-        <div class="card">
+        <div class="card shadow">
             <div class="card-body">
 
                 <div class="row">

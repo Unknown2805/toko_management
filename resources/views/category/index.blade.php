@@ -29,7 +29,7 @@
     
         <h2 class="mb-3">Category</h2>
     {{-- table --}}
-        <div class="card">
+        <div class="card shadow">
             <div class="card-body">
 
                 <div class="row">

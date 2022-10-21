@@ -4,7 +4,7 @@
     {{-- table --}}
         <h2 class="mb-3">History Products In</h2>
         
-        <div class="card">
+        <div class="card shadow">
             <div class="card-body">
 
                 <a class="btn btn-danger" href={{url('history/in/pdf')}}>

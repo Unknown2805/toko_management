@@ -5,7 +5,7 @@
     {{-- table --}}
         <h2 class="mb-3">History Products Out</h2>
     
-        <div class="card">
+        <div class="card shadow">
             <div class="card-body">
                 <a class="btn btn-danger" href={{url('history/out/pdf')}}>
                     <span class="me-1"><i class="bi bi-printer-fill"></i></span>
