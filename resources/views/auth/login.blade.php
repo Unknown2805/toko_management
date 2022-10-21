@@ -79,7 +79,7 @@
             <div class="col-lg-7 d-none d-lg-block">
                 <div id="auth-right">
 
-                    <img src="images/faces/1.jpg" width="700px" height="650px">
+                    <img src="images/bg/login.jpg" width="700px" height="650px">
                 </div>
             </div>
         </div>

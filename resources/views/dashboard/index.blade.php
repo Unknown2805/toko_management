@@ -7,12 +7,12 @@
             <div class="col-6 col-md-3">
                 @if(!isset($profile[0]->name))
                     <a data-bs-toggle="modal" data-bs-target="#addProfile">                    
-                        <div class="card">
+                        <div class="card shadow">
                             <div class="card-body px-4 py-4-5">
                                 <div class="row">
                                     <div class="col-4 col-md-4">
                                         <div class="avatar avatar-xl">
-                                            <img src="{{ asset('/images/bg/user.jpg')}}" class="card-img border border-2 border-secondary" alt="..." style="height:60px;width:60px;">
+                                            <img src="{{ asset('/images/bg/image.png')}}" class="card-img border border-2 border-secondary" alt="..." style="height:60px;width:60px;">
                                         </div>
                                     </div>
                                     <div class="col-8 col-md-8">
@@ -27,12 +27,12 @@
                 @else
                     @foreach($profile as $p)
                         <a data-bs-toggle="modal" data-bs-target="#viewProfile{{$p->id}}">               
-                            <div class="card">
+                            <div class="card shadow">
                                 <div class="card-body px-4 py-4-5">
                                     <div class="row">
                                         <div class="col-4 col-md-4">
                                             <div class="avatar avatar-xl">
-                                                <img src="{{ $p->image == null ? asset('/images/bg/user.jpg') : asset('/storage/profile/' .$p->image) }}" class="card-img border border-2 border-secondary" alt="..." style="height:60px;width:60px;" />
+                                                <img src="{{ $p->image == null ? asset('/images/bg/image.png') : asset('/storage/profile/' .$p->image) }}" class="card-img border border-2 border-secondary" alt="..." style="height:60px;width:60px;" />
                                             </div>
                                         </div>
                                         <div class="col-8 col-md-8">
@@ -48,7 +48,7 @@
                 @endif
             </div>
             <div class="col-6 col-md-3">
-                <div class="card">
+                <div class="card shadow">
                     <div class="card-body px-4 py-4-5">
                         <div class="row">
                             <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="col-6 col-md-3">
-                <div class="card">
+                <div class="card shadow">
                     <div class="card-body px-4 py-4-5">
                         <div class="row">
                             <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
@@ -85,7 +85,7 @@
             </div>
             <div class="col-6 col-md-3">
                 <a data-bs-toggle="modal" data-bs-target="#viewUser{{Auth::user()->id}}">                
-                    <div class="card">
+                    <div class="card shadow">
                         <div class="card-body px-4 py-4-5">
                             <div class="row">
                                 <div class="col-4 col-md-4">
@@ -132,7 +132,7 @@
         </div>
 
     {{-- Top Ten Product --}}
-        <div class="card">
+        <div class="card shadow">
             <div class="card-header">
                 <h6>Top Ten Product</h6>
             </div>    
