@@ -21,46 +21,46 @@ class DashboardController extends Controller
 
 //view 
     public function index()
-    {
-        $category = Category::with('products.outs')->get();
-        $profile = Profile::all();
-        $product = Product::all();
-        $historyOuts = HistoryOut::all();
-        $user = User::all();
-        $data = Transaction::all();
-        
-                            
-        foreach ($category as $c) {
-            foreach ($c->products as $p) {
-                foreach ($p->outs as $o) {
-                    $top = $o->orderBy('qty_k','desc');
+        {
+            $category = Category::with('products.outs')->get();
+            $profile = Profile::all();
+            $product = Product::all();
+            $historyOuts = HistoryOut::all();
+            $user = User::all();
+            $data = Transaction::all();
+            
+                                
+            foreach ($category as $c) {
+                foreach ($c->products as $p) {
+                    foreach ($p->outs as $o) {
+                        $top = $o->orderBy('qty_k','desc');
+                    }
                 }
             }
+
+                $this_year = Carbon::now()->format('Y');
+                $month_p = Transaction::where('created_at','like', $this_year.'%')->get();
+                
+                for ($i=1; $i <= 12; $i++){
+                    $data_month_un_p[(int)$i]=0;
+                    $data_month_rug_p[(int)$i]=0;    
+                }
+        
+                foreach ($month_p as $a) {
+                    $bulan_in_p= explode('-',carbon::parse($a->created_at)->format('Y-m-d'))[1];
+        
+                        $data_month_un_p[(int) $bulan_in_p]+= $a->netto; 
+                        $data_month_rug_p[(int) $bulan_in_p]+=$a->loss;                                               
+                }
+
+                $stock = $product->sum('qty');
+                $sold = $historyOuts->sum('qty_k');
+                return view('dashboard.index',compact('category','profile','user','stock','sold',))
+                -> with('data_month_un_p', $data_month_un_p)
+                -> with('data_month_rug_p', $data_month_rug_p);
+                ;
+                        
         }
-
-            $this_year = Carbon::now()->format('Y');
-            $month_p = Transaction::where('created_at','like', $this_year.'%')->get();
-            
-            for ($i=1; $i <= 12; $i++){
-                $data_month_un_p[(int)$i]=0;
-                $data_month_rug_p[(int)$i]=0;    
-            }
-    
-            foreach ($month_p as $a) {
-                $bulan_in_p= explode('-',carbon::parse($a->created_at)->format('Y-m-d'))[1];
-    
-                    $data_month_un_p[(int) $bulan_in_p]+= $a->netto; 
-                    $data_month_rug_p[(int) $bulan_in_p]+=$a->loss;                                               
-            }
-
-            $stock = $product->sum('qty');
-            $sold = $historyOuts->sum('qty_k');
-            return view('dashboard.index',compact('category','profile','user','stock','sold','top'))
-            -> with('data_month_un_p', $data_month_un_p)
-            -> with('data_month_rug_p', $data_month_rug_p);
-            ;
-                      
-    }
 
 //add profile
     public function store(Request $request)
