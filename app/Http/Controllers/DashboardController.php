@@ -55,7 +55,7 @@ class DashboardController extends Controller
 
                 $stock = $product->sum('qty');
                 $sold = $historyOuts->sum('qty_k');
-                return view('dashboard.index',compact('category','profile','user','stock','sold',))
+                return view('dashboard.index',compact('category','profile','user','stock','sold'))
                 -> with('data_month_un_p', $data_month_un_p)
                 -> with('data_month_rug_p', $data_month_rug_p);
                 ;
