@@ -11,7 +11,7 @@ class HistoryInController extends Controller
 //view
     public function index()
         {
-            $category = Category::with('products.historyins')->get();
+            $category = Category::with('products.historyins')->orderBy('created_at','desc')->get();
                     
             return view('historyIn.index',compact('category'));
 

@@ -89,7 +89,7 @@
                             <div class="modal-body">
                                 <div class="col-12 col-md-12 mb-4">
                                     <div class="d-flex justify-content-center">
-                                        <img src="{{ $p->image == null ? asset('assets/images/samples/image_default.jpg') : asset('/storage/product/'. $p->image) }}" style="height: 150px;width:150px;border-radius:150px;">
+                                        <img src="{{ $p->image == null ? asset('images/bg/image.png') : asset('/storage/product/'. $p->image) }}" style="height: 150px;width:150px;border-radius:150px;">
                                     </div>
                                 </div>
                                 <hr>

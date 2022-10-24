@@ -42,6 +42,7 @@
                                 </a>
                             </li>
 
+                        @hasrole('admin')
                             {{-- category --}}
                             <li class="sidebar-item {{ request()->is('category*') ? 'active' : '' }}">
                                 <a href="{{ url('/category') }}" class='sidebar-link'>
@@ -62,13 +63,18 @@
                                     <i class="bi bi-bar-chart-line"></i>
                                     <span>Products Sale</span>
                                 </a>  
-                            </li>   
+                            </li>
+                        @endhasrole
+
+                            {{-- history out --}}
                             <li class="sidebar-item {{ request()->is('history/in*') ? 'active' : '' }}">
                                 <a href="{{ url('/history/in') }}" class='sidebar-link'>
                                     <i class="bi bi-box-arrow-in-down-right"></i>
                                     <span>History In</span>
                                 </a>  
                             </li>   
+
+                            {{-- history in --}}
                             <li class="sidebar-item {{ request()->is('history/out*') ? 'active' : '' }}">
                                 <a href="{{ url('/history/out') }}" class='sidebar-link'>
                                     <i class="bi bi-box-arrow-in-up-right"></i>
@@ -117,3 +123,4 @@
     </body>
 
 </html>
+

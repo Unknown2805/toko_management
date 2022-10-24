@@ -22,7 +22,7 @@ class DashboardController extends Controller
 //view 
     public function index()
         {
-            $category = Category::with('products.outs')->get();
+            $category = Category::with('products.outs')->limit(10)->get();
             $profile = Profile::all();
             $product = Product::all();
             $historyOuts = HistoryOut::all();
