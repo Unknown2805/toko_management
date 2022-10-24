@@ -71,6 +71,7 @@
                                 @foreach($c->products as $key => $p)
                                     @foreach($p->outs as $o)
                                                                         
+                                    @if($p->qty)
                                         <tr>    
                                             <td>{{ $i++ }}</td>
                                             <td>
@@ -78,11 +79,7 @@
                                             </td>
                                             <td>{{ $c->name }}</td>
                                             <td>{{ $p->name }}</td>
-                                            @if($p->qty)
                                             <td>{{ $p->qty }}</td>
-                                            @elseif($p->qty === 0 )
-                                            <td class="text-secondary"><i>Sold Out</i></td>
-                                            @endif
                                             <td>                                            
                                                 <div class="d-flex justify-content-center">  
                                                     @if($o->price_k == null) 
@@ -97,6 +94,8 @@
                                                 </div>
                                             </td>
                                         </tr>  
+                                    @elseif($p->qty === 0 )
+                                    @endif
                                     @endforeach
                                 @endforeach
                             @endforeach     

@@ -10,10 +10,6 @@ use App\Http\Controllers\HistoryOutController;
 use App\Http\Controllers\TransactionController;
 
 
-Route::get('/', function () {
-    return view('auth.login');
-});
-
 Route::controller(App\Http\Controllers\ProductController::class)
 ->prefix('/product')
     ->group(function(){
@@ -81,3 +77,7 @@ Route::controller(App\Http\Controllers\DashboardController::class)
 Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
+Route::get('/', function () {
+    return view('auth.login');
+});
+
