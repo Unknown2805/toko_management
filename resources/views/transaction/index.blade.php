@@ -11,9 +11,11 @@
                     <span class="me-1"><i class="bi bi-printer-fill"></i></span>
                     PDF
                 </a>
+                <a href="/transaction/export_excel" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a>
+
                 <table class="table" id="table1">
                     <thead>
-                        <th>No</th>
+                        <th>Date Time</th>
                         <th>Category</th>
                         <th>Name</th>
                         <th>Quantity</th> 
@@ -35,7 +37,6 @@
                     
                     </thead>
                     <tbody>
-                        @php $i=1 @endphp
                         @foreach($category as $key => $c)
                             @foreach($c->products as $p)
                                 @foreach($p->outs as $o)
@@ -43,12 +44,12 @@
                                         @foreach($ho->transactions as $t)
                                                                         
                                         <tr>
-                                            <td>{{ $i++}}</td>                                            
+                                            <td>{{ date('d-m-Y H:i', strtotime($ho->created_at))}}</td>
                                             <td>{{ $c->name }}</td>
                                             <td>{{ $p->name }}</td>
                                             <td>{{ $ho->qty_k }}</td>  
-                                            <td>{{ $t->total }}
                                             <td>Rp. @money((float)$ho->price_k)</td>   
+                                            <td>Rp. @money((float)$t->total)</td>
                                             <td class="text-success">Rp. @money((float)$t->profit)</td>
                                             <td class="text-danger">Rp. @money((float)$t->loss)</td>
                                             <td class="text-success">Rp. @money((float)$t->netto)</td>                                                                              

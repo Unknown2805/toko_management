@@ -9,6 +9,8 @@ use App\Models\ProductOut;
 use App\Models\HistoryOut;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\ProductsExport;
+use App\Exports\TransactionExports;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -27,5 +29,10 @@ class TransactionController extends Controller
             $category = Category::with('products.outs.historyouts.transactions')->get();
             $pdf = Pdf::loadview('transaction.pdf',['category'=>$category]);
             return $pdf->download('Products Sale.pdf');
+        }
+//excel
+    public function export_excel()
+        {
+            return Excel::download(new TransactionExports, 'transaction.xlsx');
         }
 }

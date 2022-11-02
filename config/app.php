@@ -69,8 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
-
+    'timezone' => env('APP_TIMEZONE', 'Asia/Jakarta'),
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -82,7 +81,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'id',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,7 +107,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'id_ID',
 
     /*
     |--------------------------------------------------------------------------
@@ -196,6 +195,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -212,6 +212,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
         ])->toArray(),
 
 ];
