@@ -33,7 +33,7 @@
                         @foreach($p->historyins as $hi)
                             <tr>
                                 <td>{{ $i++}}</td>     
-                                <td>{{ date('d-m-Y h:i', strtotime($hi->created_at))}}</td>
+                                <td>{{ date('d-m-Y H:i', strtotime($hi->created_at))}}</td>
                                 <td>{{ $c->name }}</td>                               
                                 <td>{{ $p->name }}</td>   
                                 <td>{{ $hi->qty}}</td>

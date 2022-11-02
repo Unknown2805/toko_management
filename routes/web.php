@@ -62,6 +62,7 @@ Route::controller(App\Http\Controllers\TransactionController::class)
     ->group(function(){
         Route::get('/','index');
         Route::get('/pdf','sale_pdf');
+        Route::get('/export_excel','export_excel');
         });
 Route::controller(App\Http\Controllers\DashboardController::class)
 ->prefix('/dashboard')

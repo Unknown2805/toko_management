@@ -33,7 +33,7 @@
                                             <td>
                                                 <img src="{{ $p->image == null ? asset('images/bg/image.png') : asset('/storage/product/'. $p->image) }}" style="height: 170px;width:170px;border-radius:10px;">
                                             </td>
-                                            <td>{{ date('d-m-Y h:i', strtotime($hi->created_at))}}</td>
+                                            <td>{{ date('d-m-Y H:i', strtotime($hi->created_at))}}</td>
                                             <td>{{ $c->name }}</td>
                                             <td>{{ $p->name }}</td>
                                             <td>{{ $hi->qty }}</td>  

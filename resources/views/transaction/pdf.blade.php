@@ -16,7 +16,7 @@
         </center>
         <table class="table" id="table1">
             <thead>
-                <th>No</th>
+                <th>Date time</th>
                 <th>Category</th>
                 <th>Name</th>
                 <th>Quantity</th> 
@@ -46,12 +46,12 @@
                                 @foreach($ho->transactions as $t)
                                                                 
                                 <tr>
-                                    <td>{{ $i++}}</td>                                            
+                                    <td>{{ date('d-m-Y H:i', strtotime($ho->created_at))}}</td>
                                     <td>{{ $c->name }}</td>
                                     <td>{{ $p->name }}</td>
                                     <td>{{ $ho->qty_k }}</td>  
-                                    <td>{{ $t->total }}
                                     <td>Rp. @money((float)$ho->price_k)</td>   
+                                    <td>Rp. @money((float)$t->total)</td>
                                     <td class="text-success">Rp. @money((float)$t->profit)</td>
                                     <td class="text-danger">Rp. @money((float)$t->loss)</td>
                                     <td class="text-success">Rp. @money((float)$t->netto)</td>                                                                              

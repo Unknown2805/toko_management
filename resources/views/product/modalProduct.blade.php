@@ -123,7 +123,7 @@
         
                                             <div class="form-group">
                                                 <select class="choices form-select" aria-label="Default select example" name="category_id">
-                                                    @foreach ($category as $c)                                            
+                                                    @foreach($category as $c)                                            
                                                         <option value="{{$c->id}}">{{$c->name}}</option>
                                                     @endforeach    
                                                 </select>

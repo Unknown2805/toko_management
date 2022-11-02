@@ -25,10 +25,10 @@ class Product extends Model
     }
 
     public function outs(){
-        return $this->hasMany(ProductOut::class);
+        return $this->hasMany(ProductOut::class,);
     }
 
     public function historyins(){
-        return $this->hasMany(HistoryIn::class,'');
+        return $this->hasMany(HistoryIn::class);
     }
 }
