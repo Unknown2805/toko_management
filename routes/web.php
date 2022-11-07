@@ -9,40 +9,51 @@ use App\Http\Controllers\HistoryInController;
 use App\Http\Controllers\HistoryOutController;
 use App\Http\Controllers\TransactionController;
 
-
-Route::controller(App\Http\Controllers\ProductController::class)
-->prefix('/product')
-    ->group(function(){
-        //in
+Route::group(['middleware' => ['role:admin']], function () {
+    
+    Route::controller(App\Http\Controllers\ProductController::class)
+    ->prefix('/product')
+        ->group(function(){
+            //in
+                Route::get('/','index');
+                Route::get('/pdf','product_pdf');
+                Route::post('/add','store');
+                Route::put('/edit/{id}', 'edit');
+                Route::delete('/delete/{id}', 'destroy');
+    
+        });
+    
+    Route::controller(App\Http\Controllers\ProductOutController::class)
+    ->prefix('/product/out')
+        ->group(function(){
+            //out
+                Route::get('','index');
+                Route::put('/add/{id}','price');
+                Route::put('/edit/price/{id}', 'editPrice');
+                Route::put('/sell/{id}','sell');
+                Route::delete('/delete/{id}', 'destroy');
+    
+        });
+    Route::controller(App\Http\Controllers\CategoryController::class)
+    ->prefix('/category')
+        ->group(function(){
+                Route::get('/','index');
+                Route::get('/pdf','category_pdf');
+                Route::post('/add','store',);
+                Route::put('/edit/{id}', 'edit');
+                Route::delete('/delete/{id}', 'destroy');
+    
+        });
+    Route::controller(App\Http\Controllers\HistoryOutController::class)
+    ->prefix('/transaction')
+        ->group(function(){
             Route::get('/','index');
-            Route::get('/pdf','product_pdf');
-            Route::post('/add','store');
-            Route::put('/edit/{id}', 'edit');
-            Route::delete('/delete/{id}', 'destroy');
+            Route::get('/pdf','sale_pdf');
+            Route::get('/export_excel','export_excel');
+            });
+            
+});
 
-    });
-
-Route::controller(App\Http\Controllers\ProductOutController::class)
-->prefix('/product/out')
-    ->group(function(){
-        //out
-            Route::get('','index');
-            Route::put('/add/{id}','price');
-            Route::put('/edit/price/{id}', 'editPrice');
-            Route::put('/sell/{id}','sell');
-            Route::delete('/delete/{id}', 'destroy');
-
-    });
-Route::controller(App\Http\Controllers\CategoryController::class)
-->prefix('/category')
-    ->group(function(){
-            Route::get('/','index');
-            Route::get('/pdf','category_pdf');
-            Route::post('/add','store',);
-            Route::put('/edit/{id}', 'edit');
-            Route::delete('/delete/{id}', 'destroy');
-
-    });
 
 Route::controller(App\Http\Controllers\HistoryInController::class)
 ->prefix('/history/in')
@@ -50,7 +61,8 @@ Route::controller(App\Http\Controllers\HistoryInController::class)
             Route::get('/','index');
             Route::get('/pdf','his_in_pdf');
     });
-Route::controller(App\Http\Controllers\HistoryOutController::class)
+
+Route::controller(App\Http\Controllers\DashboardController::class)
 ->prefix('/history/out')
     ->group(function(){
             Route::get('/','index');
@@ -58,13 +70,6 @@ Route::controller(App\Http\Controllers\HistoryOutController::class)
     });
 
 Route::controller(App\Http\Controllers\TransactionController::class)
-->prefix('/transaction')
-    ->group(function(){
-        Route::get('/','index');
-        Route::get('/pdf','sale_pdf');
-        Route::get('/export_excel','export_excel');
-        });
-Route::controller(App\Http\Controllers\DashboardController::class)
 ->prefix('/dashboard')
     ->group(function(){
         Route::get('/','index');
