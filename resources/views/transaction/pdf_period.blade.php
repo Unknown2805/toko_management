@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,6 +14,7 @@
         </style>
         <center>
             <h5>Products Sale</h4>
+            <h6>{{ date('d M Y', strtotime($tgl1)) }} - {{ date('d M Y', strtotime($tgl2)) }}</h6>
         </center>
         <table class="table" id="table1">
             <thead>
@@ -38,31 +40,20 @@
             
             </thead>
             <tbody>
-                
-                @foreach($category as $key => $c)
-                    @foreach($c->products as $p)
-                        @foreach($p->outs as $o)
-                            @foreach($o->historyouts as $ho)
-                                @foreach($ho->transactions as $t)
-                                                                
-                                <tr>
-                                    <td>{{ date('d-m-Y H:i', strtotime($ho->created_at))}}</td>
-                                    <td>{{ $c->name }}</td>
-                                    <td>{{ $p->name }}</td>
-                                    <td>{{ $ho->qty_k }}</td>  
-                                    <td>Rp. @money((float)$ho->price_k)</td>   
-                                    <td>Rp. @money((float)$t->total)</td>
-                                    <td class="text-success">Rp. @money((float)$t->profit)</td>
-                                    <td class="text-danger">Rp. @money((float)$t->loss)</td>
-                                    <td class="text-success">Rp. @money((float)$t->netto)</td> 
-                                </tr> 
-
-
-                                @endforeach
-                            @endforeach
-                        @endforeach
-                    @endforeach  
-                @endforeach   
+                @foreach ($transactions as $transaction)
+                    
+                    <tr>
+                        <td>{{ date('d-m-Y H:i', strtotime($transaction->history_out->created_at))}}</td>
+                        <td>{{ $transaction->history_out->product_out->product->category->name }}</td>
+                        <td>{{ $transaction->history_out->product_out->product->name }}</td>
+                        <td>{{ $transaction->history_out->qty_k }}</td>  
+                        <td>Rp. @money((float)$transaction->history_out->price_k)</td>   
+                        <td>Rp. @money((float)$transaction->total)</td>
+                        <td class="text-success">Rp. @money((float)$transaction->profit)</td>
+                        <td class="text-danger">Rp. @money((float)$transaction->loss)</td>
+                        <td class="text-success">Rp. @money((float)$transaction->netto)</td>
+                    </tr> 
+                @endforeach                                                                                            
             </tbody>
         </table>
 

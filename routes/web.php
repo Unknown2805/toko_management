@@ -22,18 +22,7 @@ Route::group(['middleware' => ['role:admin']], function () {
                 Route::delete('/delete/{id}', 'destroy');
     
         });
-    
-    Route::controller(App\Http\Controllers\ProductOutController::class)
-    ->prefix('/product/out')
-        ->group(function(){
-            //out
-                Route::get('','index');
-                Route::put('/add/{id}','price');
-                Route::put('/edit/price/{id}', 'editPrice');
-                Route::put('/sell/{id}','sell');
-                Route::delete('/delete/{id}', 'destroy');
-    
-        });
+
     Route::controller(App\Http\Controllers\CategoryController::class)
     ->prefix('/category')
         ->group(function(){
@@ -44,11 +33,12 @@ Route::group(['middleware' => ['role:admin']], function () {
                 Route::delete('/delete/{id}', 'destroy');
     
         });
-    Route::controller(App\Http\Controllers\HistoryOutController::class)
+    Route::controller(App\Http\Controllers\TransactionController::class)
     ->prefix('/transaction')
         ->group(function(){
             Route::get('/','index');
             Route::get('/pdf','sale_pdf');
+            Route::post('/pdf_period','periode_pdf');
             Route::get('/export_excel','export_excel');
             });
             
@@ -62,11 +52,22 @@ Route::controller(App\Http\Controllers\HistoryInController::class)
             Route::get('/pdf','his_in_pdf');
     });
 
-Route::controller(App\Http\Controllers\DashboardController::class)
+Route::controller(App\Http\Controllers\HistoryOutController::class)
 ->prefix('/history/out')
     ->group(function(){
             Route::get('/','index');
             Route::get('/pdf','his_out_pdf');
+    });
+Route::controller(App\Http\Controllers\ProductOutController::class)
+->prefix('/product/out')
+    ->group(function(){
+        //out
+            Route::get('/','index');
+            Route::put('/add/{id}','price');
+            Route::put('/edit/price/{id}', 'editPrice');
+            Route::put('/sell/{id}','sell');
+            Route::delete('/delete/{id}', 'destroy');
+
     });
 
 Route::controller(App\Http\Controllers\TransactionController::class)
@@ -81,7 +82,6 @@ Route::controller(App\Http\Controllers\TransactionController::class)
         });
 
 Auth::routes();
-
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index']);
 Route::get('/', function () {
     return view('auth.login');

@@ -7,6 +7,20 @@
         
         <div class="card shadow">
             <div class="card-body">
+                <form action={{url('transaction/pdf_period')}} method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        @csrf
+                        <div class="col-12 col-md-3">
+                            <input class="form-control" type="date" name="tgl1">
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <input class="form-control" type="date" name="tgl2">
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <button type="submit" class="btn btn-danger">Cetak Periode</button>
+                        </div>          
+                    </div>
+                </form>
                 <a class="btn btn-danger" href={{url('transaction/pdf')}}>
                     <span class="me-1"><i class="bi bi-printer-fill"></i></span>
                     PDF
