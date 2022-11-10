@@ -70,7 +70,7 @@ Route::controller(App\Http\Controllers\ProductOutController::class)
 
     });
 
-Route::controller(App\Http\Controllers\TransactionController::class)
+Route::controller(App\Http\Controllers\DashboardController::class)
 ->prefix('/dashboard')
     ->group(function(){
         Route::get('/','index');
