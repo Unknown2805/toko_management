@@ -117,12 +117,12 @@
 
                                 <h6>Rekap Penjualan Product</h6>
                             </div>
-                            <form action={{ route('dashboard.filter') }} method="POST">
+                            <form action={{ route('dashboard.filter') }} method="POST" >
                                 @csrf
                                 <div class="row">
                                     <div class="col-7 col-md-7">
 
-                                        <input id="datepicker" name="date" class="form-control w-100"/>
+                                        <input id="datepicker" name="date"  class="form-control w-100"/>
                                     </div>
 
                                     <div class="col-4 col-md-4">

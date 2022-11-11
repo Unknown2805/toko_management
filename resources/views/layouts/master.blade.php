@@ -13,9 +13,9 @@
         <link rel="shortcut icon" href={{ asset('assets/images/logo/favicon.png') }} type="image/png">
         <link rel="stylesheet" href={{ asset('assets/css/shared/iconly.css')}}>
    
-
-
-
+        {{-- test --}}
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+        
     </head>
 
     <body>
@@ -118,7 +118,15 @@
         <script src="assets/js/pages/simple-datatables.js"></script>
         <script src="assets/extensions/choices.js/public/assets/scripts/choices.js"></script>
         <script src="assets/js/pages/form-element-select.js"></script>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+        <script>
+                $("#datepicker").datepicker( {
+                format: "MM yyyy",
+                startView: "months", 
+                minViewMode: "months"
+            });
+        </script>
 
     </body>
 

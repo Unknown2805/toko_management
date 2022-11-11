@@ -38,10 +38,13 @@ class DashboardController extends Controller
                 }
             }
 
-                $this_year = Carbon::now()->format('Y');
-                $month_p = Transaction::where('created_at','like', $this_year.'%')->get();
-                
-                for ($i=1; $i <= 12; $i++){
+            
+                $this_m = Carbon::parse('M')->now();                
+                $this_month = Carbon::now()->format('Y-m');
+
+                $month_p = Transaction::where('created_at','like', $this_month.'%')->get();
+     
+                for ($i=1; $i <= $this_m->daysInMonth ; $i++){
                     $data_month_un_p[(int)$i]=0;
                     $data_month_rug_p[(int)$i]=0;    
                 }
@@ -52,10 +55,14 @@ class DashboardController extends Controller
                         $data_month_un_p[(int) $bulan_in_p]+= $a->netto; 
                         $data_month_rug_p[(int) $bulan_in_p]+=$a->loss;                                               
                 }
+                $label_m = $this_m->daysInMonth;
+                // dd($label_m);
+                // dd($data_month_un_p);
 
+         
                 $stock = $product->sum('qty');
                 $sold = $historyOuts->sum('qty_k');
-                return view('dashboard.index',compact('category','profile','user','stock','sold',))
+                return view('dashboard.index',compact('category','profile','user','stock','sold','label_m'))
                 -> with('data_month_un_p', $data_month_un_p)
                 -> with('data_month_rug_p', $data_month_rug_p);
                 ;
@@ -152,5 +159,51 @@ class DashboardController extends Controller
         $data->update();
 
         return redirect()->back();
+    }
+//filter
+public function filter(Request $request)
+    {
+        $category = Category::with('products.outs')->limit(10)->get();
+        $profile = Profile::all();
+        $product = Product::all();
+        $historyOuts = HistoryOut::all();
+        $user = User::all();
+        $data = Transaction::all();
+
+        foreach ($category as $c) {
+            foreach ($c->products as $p) {
+                foreach ($p->outs as $o) {
+                    $top = $o->orderBy('qty_k','desc');
+                }
+            }
+        }
+            
+            $this_month = Carbon::parse($request->date)->format('Y-m');
+            $month = Carbon::parse($request->date)->format('Y-m-d H:i:s');
+            $result = Carbon::parse($month);
+            
+            $month_p = Transaction::where('created_at','like', $this_month.'%')->get();
+          
+            for ($i=1; $i <= $result->daysInMonth ; $i++){
+                $data_month_un_p[(int)$i]=0;
+                $data_month_rug_p[(int)$i]=0;    
+            }
+            
+            foreach ($month_p as $a) {
+                $bulan_in_p= explode('-',carbon::parse($a->created_at)->format('Y-m-d'))[1];
+
+                    $data_month_un_p[(int) $bulan_in_p]+= $a->netto; 
+                    $data_month_rug_p[(int) $bulan_in_p]+=$a->loss;                                               
+            }
+        
+            $label_m = $result->daysInMonth;
+
+            $stock = $product->sum('qty');
+            $sold = $historyOuts->sum('qty_k');
+            return view('dashboard.indexfilter',compact('category','profile','user','stock','sold','label_m'))
+            -> with('data_month_un_p', $data_month_un_p)
+            -> with('data_month_rug_p', $data_month_rug_p);
+            ;
+                    
     }
 }
