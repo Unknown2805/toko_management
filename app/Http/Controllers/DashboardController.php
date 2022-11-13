@@ -39,30 +39,26 @@ class DashboardController extends Controller
             }
 
             
-                $this_m = Carbon::parse('M')->now();                
-                $this_month = Carbon::now()->format('Y-m');
-
+                $this_month = Carbon::now()->format('Y');
                 $month_p = Transaction::where('created_at','like', $this_month.'%')->get();
      
-                for ($i=1; $i <= $this_m->daysInMonth ; $i++){
+                for ($i=1; $i <= 12 ; $i++){
                     $data_month_un_p[(int)$i]=0;
                     $data_month_rug_p[(int)$i]=0;    
                 }
         
                 foreach ($month_p as $a) {
-                    $bulan_in_p= explode('-',carbon::parse($a->created_at)->format('Y-m-d'))[1];
-        
+                    $bulan_in_p= explode('-',carbon::parse($a->created_at)->format('Y-m-d'))[1];                  
                         $data_month_un_p[(int) $bulan_in_p]+= $a->netto; 
-                        $data_month_rug_p[(int) $bulan_in_p]+=$a->loss;                                               
+                        $data_month_rug_p[(int) $bulan_in_p]+=$a->loss;       
+                    // dd($bulan_in_p);                                        
+                        
                 }
-                $label_m = $this_m->daysInMonth;
-                // dd($label_m);
-                // dd($data_month_un_p);
 
          
                 $stock = $product->sum('qty');
                 $sold = $historyOuts->sum('qty_k');
-                return view('dashboard.index',compact('category','profile','user','stock','sold','label_m'))
+                return view('dashboard.index',compact('category','profile','user','stock','sold'))
                 -> with('data_month_un_p', $data_month_un_p)
                 -> with('data_month_rug_p', $data_month_rug_p);
                 ;
@@ -178,24 +174,28 @@ public function filter(Request $request)
             }
         }
             
-            $this_month = Carbon::parse($request->date)->format('Y-m');
-            $month = Carbon::parse($request->date)->format('Y-m-d H:i:s');
-            $result = Carbon::parse($month);
-            
-            $month_p = Transaction::where('created_at','like', $this_month.'%')->get();
-          
+        $this_month = Carbon::parse($request->date)->format('m');
+        $month = Carbon::parse($request->date)->format('Y-m-d H:i:s');
+            $result = Carbon::parse($month);            
+            $month_p = Transaction::whereMonth('created_at','=', $this_month)->get();      
+            // dd($month_p);
+
             for ($i=1; $i <= $result->daysInMonth ; $i++){
                 $data_month_un_p[(int)$i]=0;
                 $data_month_rug_p[(int)$i]=0;    
             }
             
             foreach ($month_p as $a) {
-                $bulan_in_p= explode('-',carbon::parse($a->created_at)->format('Y-m-d'))[1];
-
-                    $data_month_un_p[(int) $bulan_in_p]+= $a->netto; 
-                    $data_month_rug_p[(int) $bulan_in_p]+=$a->loss;                                               
+                
+                $bulan_in_p= explode('-',carbon::parse($a->created_at)->format('m-d'))[1];                  
+                
+                $data_month_un_p[(int) $bulan_in_p]+= $a->netto; 
+                $data_month_rug_p[(int) $bulan_in_p]+=$a->loss;                                               
+                // dd($bulan_in_p);cd 
+                // dd($a->created_at);
             }
-        
+            // dd($data_month_un_p);
+
             $label_m = $result->daysInMonth;
 
             $stock = $product->sum('qty');
