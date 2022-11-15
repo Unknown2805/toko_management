@@ -110,7 +110,7 @@
 
             </div>
         </div>
-        {{-- @include('sweetalert::alert') --}}
+        @include('sweetalert::alert')
 
         <script src="assets/js/bootstrap.js"></script>
         <script src="assets/js/app.js"></script>
@@ -127,7 +127,6 @@
                 minViewMode: "months"
             });
         </script>
-
     </body>
 
 </html>

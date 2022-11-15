@@ -16,6 +16,11 @@ use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
+//Auth
+    public function __construct()
+        {
+            $this->middleware('auth');
+        }
 //view
     public function index()
         {

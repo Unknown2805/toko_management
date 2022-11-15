@@ -10,7 +10,12 @@ use App\Exports\ProductsExport;
 use Illuminate\Http\Request;
 
 class HistoryOutController extends Controller
-{
+{    
+//Auth
+    public function __construct()
+        {
+            $this->middleware('auth');
+        }
 //view
     public function index()
     {

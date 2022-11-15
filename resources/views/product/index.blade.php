@@ -31,7 +31,7 @@
             @endforeach
         @endforeach
     {{-- table --}}
-        <h2 class="mb-3 text-dark">Products</h2>
+        <h2 class="mb-3">Products</h2>
             
         <div class="card shadow">
             <div class="card-body">

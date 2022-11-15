@@ -8,8 +8,9 @@ use App\Models\ProductOut;
 use App\Models\HistoryIn;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\ProductsExport;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
 //Auth
@@ -34,8 +35,8 @@ class ProductController extends Controller
 //add 
     public function store(Request $request)
             {
-                
-                $this->validate($request, [
+               
+                $validator = Validator::make($request->all(),[
                     'image' => 'file|max:3072',
                     'name' => 'required',
                     'qty' => 'required',
@@ -44,6 +45,15 @@ class ProductController extends Controller
                     'category_id' => 'required',
 
                 ]);
+                if($validator->fails()){
+
+                    toast()->error('FAILED','failed add product')->position('top');
+                    return redirect()->back();               
+
+                }else{
+                    toast()->success('SUCCESS','success add product')->position('top');
+                }
+
                 $product =  new Product();                
                 $product->name = $request->name;
                 $product->qty= $request->qty;
@@ -72,7 +82,8 @@ class ProductController extends Controller
                     'price' => $product->price,
                     'qty' => $product->qty
                 ]);
-                return redirect()->back();
+
+                return redirect()->back();               
 
             }
 
@@ -82,7 +93,7 @@ class ProductController extends Controller
             {
                 $product = Product::where('id',$id)->firstOrFail();
 
-                $request->validate([
+                $validator = Validator::make($request->all(),[
                     'image' => 'file|max:3072',
                     'name' => 'required',
                     'qty' => 'required',
@@ -91,6 +102,13 @@ class ProductController extends Controller
                     'category_id' => 'required',
                     'price_k'    
                 ]);
+                if($validator->fails()){
+                    toast()->error('FAILED','failed add product')->position('top');
+                    return redirect()->back();               
+                }else{
+                    toast()->success('SUCCESS','success add product')->position('top');
+                }
+
                 
                 $product->name = $request->name;
                 $product->qty= $request->qty;
@@ -134,7 +152,7 @@ class ProductController extends Controller
             $data = Product::find($id);
 
             $data->delete();
-
+            toast()->success('SUCCESS','success delete products')->position('top');
             return redirect()->back();
         }
     
