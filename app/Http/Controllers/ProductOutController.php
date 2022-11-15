@@ -10,20 +10,19 @@ use Illuminate\Http\Request;
 
 class ProductOutController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+//Auth
+    public function __construct()
+        {
+            $this->middleware('auth');
+        }
+//view
     public function index()
     {
         $category = Category::with('products.outs')->get();
         $out = ProductOut::all();
         return view('product.index',compact('category','out'));
     }
-
-    
-   
+//price  
     public function price(Request $request,$id)
     {
         $product = Product::where('id',$request->product_id)->first();
@@ -37,14 +36,15 @@ class ProductOutController extends Controller
             ProductOut::find($id)->update([
                 "price_k" => $price_k
             ]);
-            
+            toast()->success('SUCCESS','success add price out products')->position('top');
+            return redirect()->back();
         }
             // dd($product);
-
-        return redirect()->back();
-
+        toast()->error('FAILED','failed add price out products')->position('top');
+        return redirect()->back();       
 
     }
+//sell
     public function sell(Request $request,$id)
     {
         // dd($request);
@@ -87,11 +87,5 @@ class ProductOutController extends Controller
 
         return redirect()->back();
 
-    }
-
-   
-    public function destroy(ProductOut $productOut)
-    {
-        //
     }
 }

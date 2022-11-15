@@ -7,7 +7,12 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\ProductsExport;
 use Illuminate\Http\Request;
 class HistoryInController extends Controller
-{
+{    
+//Auth
+    public function __construct()
+        {
+            $this->middleware('auth');
+        }
 //view
     public function index()
         {

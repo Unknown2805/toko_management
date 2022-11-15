@@ -5,9 +5,15 @@ use App\Models\Category;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\ProductsExport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
+//Auth
+    public function __construct()
+        {
+            $this->middleware('auth');
+        }
 // view
     public function index()
         {
@@ -25,9 +31,15 @@ class CategoryController extends Controller
 //add
     public function store(Request $request)
         {
-            $this->validate($request, [
+            $validator = Validator::make($request->all(), [
                 'name' => 'required|unique:categories,name',
             ]);
+            if($validator->fails()){
+                toast()->error('FAILED','failed add product')->position('top');
+                return redirect()->back();               
+            }else{
+                toast()->success('SUCCESS','success add product')->position('top');
+            }
 
             $category = new Category();
             $category->name = $request->name;
@@ -45,10 +57,15 @@ class CategoryController extends Controller
         {
             $category = Category::where('id',$id)->firstOrFail();
 
-            $request->validate([
+            $validator = Validator::make($request->all(), [
                 'name' => 'required',  
             ]);
-
+            if($validator->fails()){
+                toast()->error('FAILED','failed add product')->position('top');
+                return redirect()->back();               
+            }else{
+                toast()->success('SUCCESS','success add product')->position('top');
+            }
             $category->name = $request->name;
 
             // dd($category);
@@ -64,7 +81,7 @@ class CategoryController extends Controller
             $data = Category::find($id);
 
             $data->delete();
-
+            toast()->success('SUCCESS','success delete products')->position('top');
             return redirect()->back();
         }
 }

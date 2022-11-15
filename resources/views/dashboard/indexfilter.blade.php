@@ -111,8 +111,9 @@
             <div class="col-12 col-md-12">
                 <div class="card shadow">
                     <div class="card-header">
-                        
-                            <form action={{ route('dashboard.filter') }} method="POST">
+
+                            
+                            <form action={{ route('dashboard.filter') }} method="POST" >
                                 @csrf
                                 <div class="row">
                                     <div class="col-3 col-md-4">
@@ -137,7 +138,7 @@
 
                                         <button type="submit" class="btn btn-outline-warning w-100">filter</button>
                                     </div>
-                                </div>                                      
+                                </div>                                    
                             </form>
                     </div>
 
@@ -221,21 +222,27 @@
                     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         {{-- script chart --}}
             <script>
+                    // const b_products = [
+                    //     'January',
+                    //     'February',
+                    //     'March',
+                    //     'April',
+                    //     'May',
+                    //     'June',
+                    //     'July',
+                    //     'Aug',
+                    //     'Sep',
+                    //     'Oct',
+                    //     'Nov',
+                    //     'Dec'
+                    // ];
                     const b_products = [
-                        'January',
-                        'February',
-                        'March',
-                        'April',
-                        'May',
-                        'June',
-                        'July',
-                        'Aug',
-                        'Sep',
-                        'Oct',
-                        'Nov',
-                        'Dec'
+                       
+                        @for ($i = 1; $i <= $label_m; $i++)
+                            {{ $i }},
+                        @endfor
+                     
                     ];
-                 
 
                     const b_productsd = {
                         labels: b_products,
